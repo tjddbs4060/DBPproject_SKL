@@ -53,9 +53,6 @@ d.setDate(last_day[mon]);	//마지막 날의 요일
 var last_week = d.getDay();
 var num_week = Math.ceil((last_day[mon]+start_week)/7);
 
-if (num_week == 5) document.getElementById("View").style.top = "-600px";
-else document.getElementById("View").style.top = "-700px";
-
 var day = 1;	//표를 채워 넣는데 사용할 변수
 							//달력 요일 그리기
 var string_cal = '<table border = "1" cellpadding = "0" cellspacing = "1">';
@@ -72,9 +69,11 @@ for (var i = 0; i < num_week; i++) {		//달력 일 그리기
 
 	for (var j = 0; j < 7; j++) {
 		string_date = year+"-"+(mon+1)+"-"+day;
-		string_cal += ("<td id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'vertical-align : top; text-align : left;''>");
+		string_cal += "<td";
 
 		if (!((i == 0 && j < start_week) || last_day[mon] < day)) {
+			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'vertical-align : top; text-align : left;''>");
+
 			if (j == 0) string_cal += '<font color = "#FF0000">';
 			else if (j == 6) string_cal += '<font color = "#0000FF">';
 
@@ -82,6 +81,7 @@ for (var i = 0; i < num_week; i++) {		//달력 일 그리기
 
 			if (j == 0 || j == 6) string_cal += '</font>';
 		}
+		else string_cal += ">";
 		string_cal += '</td>';
 	}
 	string_cal += '</tr>';

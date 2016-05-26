@@ -2,16 +2,18 @@
 
 <!DOCTYPE>
 <html>
-<head> <title> 崔仿 其捞瘤</title> </head>
+<head> <title> 老沥 包府 其捞瘤 </title> </head>
 <body>
 
 <script type = "text/javascript" src = "today.js"> </script>
 
 <h1> 老沥 包府 其捞瘤 </h1>
 
-<div id = "Cal" align = "left" style = "position : relative; width : 750px;"> </div>
+<table> <th> <td>
+<div id = "Cal" align = "left" style = "position : relative; width : 750px;"> </div> </td>
 
-<div id = "View" align = "left" style = "position : relative; left : 750px; width : 300px; border : thin solid black; padding-left : 20px; padding-right : 20px;">
+<td valign = "top">
+<div id = "View" align = "left" style = "position : relative; width : 300px; border : thin solid black; padding-left : 20px; padding-right : 20px;">
 
 <h3 style = "text-align : center"> 老沥 格废 </h3>
 
@@ -41,7 +43,7 @@ function display_list($date_now) {
 }
 ?>
 
-</div>
+</div> </td> </th> </table>
 
 <?php @mysql_close(); ?>
 </body>
