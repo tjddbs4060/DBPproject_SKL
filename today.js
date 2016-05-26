@@ -72,7 +72,7 @@ for (var i = 0; i < num_week; i++) {		//달력 일 그리기
 		string_cal += "<td";
 
 		if (!((i == 0 && j < start_week) || last_day[mon] < day)) {
-			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'vertical-align : top; text-align : left;''>");
+			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'vertical-align : top; text-align : left;'>");
 
 			if (j == 0) string_cal += '<font color = "#FF0000">';
 			else if (j == 6) string_cal += '<font color = "#0000FF">';

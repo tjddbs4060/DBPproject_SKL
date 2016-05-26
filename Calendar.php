@@ -13,7 +13,7 @@
 <div id = "Cal" align = "left" style = "position : relative; width : 750px;"> </div> </td>
 
 <td valign = "top">
-<div id = "View" align = "left" style = "position : relative; width : 300px; border : thin solid black; padding-left : 20px; padding-right : 20px;">
+<div id = "View" align = "left" style = "position : relative; width : 300px; border : thin solid black; padding-left : 20px; padding-right : 20px; word-wrap:break-word;">
 
 <h3 style = "text-align : center"> 일정 목록 </h3>
 
@@ -30,14 +30,15 @@ function display_list($date_now) {
 	if ($arr_list) {
 		foreach($arr_list as $put) {
 			$div_string .= $put;
-			$div_string .= "<p>";
+			$div_string .= "</p>";
 		}
 		unset($put);
 	}
 
 	$div_string .= "<br>";
-	$div_string .= "<div style = \"background-image : url('test.png'); width : 100px; height : 50px; margin : 0 auto;\" onclick = ''> </div>";	//수정 페이지로 넘어가는 버튼
-	$div_string .= "<br><p>";
+	$div_string .= "<a href = 'add_sch.php?value=".$_GET['value']."'>";
+	$div_string .= "<div style = \"background-image : url('test.png'); width : 100px; height : 50px; margin : 0 auto;\"> </div> </a>";	//수정 페이지로 넘어가는 버튼
+	$div_string .= "<br></p>";
 
 	echo $div_string;
 }
