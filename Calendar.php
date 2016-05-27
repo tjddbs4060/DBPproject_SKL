@@ -37,6 +37,7 @@ function display_list($date_now) {
 	$div_string .= "<br> </td> </tr> <tr> <td>";
 	$div_string .= "<div onclick = 'add_sch();' style = \"background-image : url('test.png'); width : 100px; height : 50px; margin : 0 auto;\"> </div> </td>";	//수정 페이지로 넘어가는 버튼
 
+	$div_string .= "<input type = 'hidden' name = 'value' value = '$date_now'>";
 	if ($i) $div_string .= "<td> <input type = 'submit' value = '선택 삭제'> </form> </td> </tr> </table>";
 	else $div_string .= "<td> </td> </tr> </table>";
 
