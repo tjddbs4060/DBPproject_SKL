@@ -94,3 +94,7 @@ draw.innerHTML = string_cal;	//div 에다가 넣기
 function View_list (value) {
 	location.href="Calendar.php?value="+value;
 }
+
+function add_sch() {
+	document.getElementById("Add").style.visibility = "visible";
+}
