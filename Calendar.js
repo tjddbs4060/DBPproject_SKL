@@ -57,6 +57,16 @@ string_cal += '<tr> <th height = "50px"> <font color = "#FF0000"> 일 </th>';
 string_cal += '<th> 월 </th> <th> 화 </th> <th> 수 </th> <th> 목 </th> <th> 금 </th>';
 string_cal += '<th> <font color = "#0000FF"> 토 </th> </tr>';
 
+var anni_now = anni_col();
+var anni_start = 0;
+var anni_end = 0;
+
+for (var i = 0; i < anni_now.length; i += 3) {
+	if (anni_now[i] == mon+1) anni_end += 3;
+	else if (anni_now[i] < mon+1) {anni_start += 3; anni_end += 3;}
+	else break;
+}
+
 for (var i = 0; i < num_week; i++) {		//달력 일 그리기
 	string_cal += '<tr height = "100px">';
 	var string_date;
@@ -66,12 +76,19 @@ for (var i = 0; i < num_week; i++) {		//달력 일 그리기
 		string_cal += "<td";
 
 		if (!((i == 0 && j < start_week) || last_day[mon] < day)) {
-			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'vertical-align : top; text-align : left;'>");
+			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'vertical-align : top; text-align : left; word-wrap : break-word; width : 100px; height : 100px;'>");
 
 			if (j == 0) string_cal += '<font color = "#FF0000">';
 			else if (j == 6) string_cal += '<font color = "#0000FF">';
 
-			string_cal += day++;
+			string_cal += day;
+
+			while (anni_now[anni_start] == mon+1 && anni_now[anni_start+1] == day && anni_start <= anni_end) {
+				anni_start += 2;
+				string_cal += "<br> <font size = '1px' color = '#ff0000'> <b>"+anni_now[anni_start]+"</b> </font>";
+				anni_start++;
+			}
+			day++;
 
 			if (j == 0 || j == 6) string_cal += '</font>';
 		}
@@ -91,4 +108,10 @@ function View_list (value) {
 
 function add_sch() {
 	document.getElementById("Add").style.visibility = "visible";
+	document.getElementById("Anni").style.visibility = "hidden";
+}
+
+function add_anni() {
+	document.getElementById("Anni").style.visibility = "visible";
+	document.getElementById("Add").style.visibility = "hidden";
 }
