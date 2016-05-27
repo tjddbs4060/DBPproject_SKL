@@ -6,6 +6,23 @@
 <body>
 
 <script type = "text/javascript" src = "Calendar.js"> </script>
+<?php
+
+$string = '<script type = "text/javascript">';
+$string .= 'window.onload = function() {';
+
+$date_now = explode("-", $_GET['value']);
+if ($date_now[1] < 10) $date_now[1] = "0".$date_now[1];
+if ($date_now[2] < 10) $date_now[2] = "0".$date_now[2];
+$date_now = "$date_now[0], $date_now[1]-1";
+
+$string .= "d = new Date($date_now);";
+$string .= 'Calendar("Cal");';
+$string .= '}';
+$string .= '</script>';
+
+echo $string;
+?>
 
 <h1> 일정 관리 페이지 </h1>
 
@@ -57,10 +74,10 @@ function display_list($date_now) {
 <b> 일정 내용 <b> </p>
 <textarea name = "content" rows = "8" cols = "47" style = "background-color : transparent; font-size : 15px; font-weight : bold; border : none;"></textarea> <br> <br>
 
-<table style = "margin : 0 auto;"> <th> <td>
-<div style = "background-image : url('test.png'); width : 100px; height : 50px; margin : 0 auto;"> </div> </td>
+<table style = "margin : 0 auto;"> <tr> <td>
+<input type = "button" value = "취소" onclick = "document.getElementById('Add').style.visibility = 'hidden';" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td>
 <td> </td> <td>
-<input type = "submit" value = "등록" align = "right" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td> </table>
+<input type = "submit" value = "등록" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td> </table>
 </form> </div>
 
 <?php @mysql_close(); ?>

@@ -1,9 +1,3 @@
-window.onload = function() {
-	d = new Date();		//¿À´Ã ³¯Â¥
-
-	Calendar("Cal");
-}
-
 var d;
 var php_date;
 
