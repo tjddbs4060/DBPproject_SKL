@@ -48,12 +48,12 @@ var last_week = d.getDay();
 var num_week = Math.ceil((last_day[mon]+start_week)/7);
 
 var day = 1;	//표를 채워 넣는데 사용할 변수
-							//달력 요일 그리기
+
 var string_cal = '<table border = "1" cellpadding = "0" cellspacing = "1">';
 string_cal += '<tr height = "100px"> <th colspan = "1" width = "100px" onclick = "Cal_down();"> down </th>';
-string_cal += ('<th colspan = "5" width = "500px"> <font size = "10px">'+year+'년 '+(mon+1)+'월 </th>');
+string_cal += ('<th colspan = "5" width = "500px"> <font class = "tit">'+year+'년 '+(mon+1)+'월 </th>');
 string_cal += '<th colspan = "1" width = "100px" onclick = "Cal_up();"> up </th> </tr>';
-string_cal += '<tr> <th height = "50px"> <font color = "#FF0000"> 일 </th>';
+string_cal += '<tr class = "normal"> <th height = "50px"> <font color = "#FF0000"> 일 </th>';
 string_cal += '<th> 월 </th> <th> 화 </th> <th> 수 </th> <th> 목 </th> <th> 금 </th>';
 string_cal += '<th> <font color = "#0000FF"> 토 </th> </tr>';
 
@@ -68,7 +68,7 @@ for (var i = 0; i < anni_now.length; i += 3) {
 }
 
 for (var i = 0; i < num_week; i++) {		//달력 일 그리기
-	string_cal += '<tr height = "100px">';
+	string_cal += '<tr class = "normal" height = "100px">';
 	var string_date;
 
 	for (var j = 0; j < 7; j++) {
@@ -85,7 +85,7 @@ for (var i = 0; i < num_week; i++) {		//달력 일 그리기
 
 			while (anni_now[anni_start] == mon+1 && anni_now[anni_start+1] == day && anni_start <= anni_end) {
 				anni_start += 2;
-				string_cal += "<br> <font size = '1px' color = '#ff0000'> <b>"+anni_now[anni_start]+"</b> </font>";
+				string_cal += "<br> <font size = '2px' color = '#ff0000'> <b>"+anni_now[anni_start]+"</b> </font>";
 				anni_start++;
 			}
 			day++;

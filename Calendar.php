@@ -3,6 +3,7 @@
 <!DOCTYPE>
 <html>
 <head> <title> 老沥 包府 其捞瘤 </title> </head>
+<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 <body style = "background-image : url('img/background.png'); background-repeat : repeat-x;">
 
 <script type = "text/javascript" src = "Calendar.js"> </script>
@@ -57,10 +58,10 @@ function display_list($date_now) {
 	$result = mysql_query($query);
 	$i = 0;
 
-	$div_string = "<h3 style = 'text-align : center'> <b>- ".$_GET['value']." -</b> </h3>";
+	$div_string = "<h3 style = 'text-align : center; font-family : serif;'> <b>- ".$_GET['value']." -</b> </h3>";
 
 	while ($arr_list = mysql_fetch_assoc($result)) {
-		if (!$i) $div_string .= "<form id = 'menu' method = 'GET' action = 'del_sch.php'>";
+		if (!$i) $div_string .= "<form class = 'sch' id = 'menu' method = 'GET' action = 'del_sch.php'>";
 		$div_string .= $arr_list['content']."<input type = 'checkbox' name = '$i' value = '".$arr_list['content']."' style = 'float : right;'> <br>";
 		$i++;
 	}
