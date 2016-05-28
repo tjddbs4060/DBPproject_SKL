@@ -3,7 +3,7 @@
 <!DOCTYPE>
 <html>
 <head> <title> 일정 관리 페이지 </title> </head>
-<body>
+<body style = "background-color : #fff1f1">
 
 <script type = "text/javascript" src = "Calendar.js"> </script>
 <?php
@@ -42,15 +42,11 @@ echo $string;
 
 ?>
 
-<h1> 일정 관리 페이지 </h1>
-
-<table> <tr> <td valign = "top">
-<div id = "Cal" align = "left" style = "position : relative; width : 750px;"> </div> </td>
-
-<td valign = "top"> <table> <tr> <td colspan = "3">
-<div id = "View" align = "left" style = "position : relative; width : 300px; border : thin solid black; padding-left : 20px; padding-right : 20px; word-wrap:break-word;">
-
-<h3 style = "text-align : center"> 일정 목록 </h3>
+<table style = "margin : 0 auto;"> <tr> <td style = "height : 100px"> </td> </tr><tr> <td valign = "top">
+<div id = "Cal" align = "left" style = "background-image : url('img/달력.png'); position : relative; width : 750px;"> </div> </td>
+<td valign = "top"> <table> <tr> <td colspan = "3"> <div style = "background-image : url('img/V.png'); height : 50px; margin-bottom : 10px"> </div> </td> </tr> 
+<tr> <td colspan = "3">
+<div id = "View" align = "left" style = "position : relative; width : 300px; border : 3px solid #ff4949; padding-left : 20px; padding-right : 20px; word-wrap:break-word;">
 
 <?php
 
@@ -64,17 +60,17 @@ function display_list($date_now) {
 	$div_string = "<h3 style = 'text-align : center'> <b>- ".$_GET['value']." -</b> </h3>";
 
 	while ($arr_list = mysql_fetch_assoc($result)) {
-		if (!$i) $div_string .= "<form method = 'GET' action = 'del_sch.php'>";
+		if (!$i) $div_string .= "<form id = 'menu' method = 'GET' action = 'del_sch.php'>";
 		$div_string .= $arr_list['content']."<input type = 'checkbox' name = '$i' value = '".$arr_list['content']."' style = 'float : right;'> <br>";
 		$i++;
 	}
 
-	$div_string .= "<br> </td> </tr> <tr> <td>";
-	$div_string .= "<div onclick = 'add_sch();' style = \"background-image : url('test.png'); width : 100px; height : 50px; margin : 0 auto;\"> </div> </td>";	//수정 페이지로 넘어가는 버튼
-
+	$div_string .= "<br> </td> </tr> <tr style = 'margin : 0 auto'> <td>";
+	$div_string .= "<img src = 'img/일정추가(일반).png' onclick = 'add_sch();' onmouseover = 'this.src = \"img/일정추가(오버).png\";' onmouseout = 'this.src = \"img/일정추가(일반).png\";' onmousedown = 'this.src = \"img/일정추가(클릭).png\";' onmouseup = 'this.src = \"img/일정추가(오버).png\";'> </td>";	//수정 페이지로 넘어가는 버튼
 	$div_string .= "<input type = 'hidden' name = 'value' value = '$date_now'>";
-	$div_string .= "<td> <input type = 'button' value = '기념일 추가' onclick = 'add_anni();'> </td>";
-	if ($i) $div_string .= "<td> <input type = 'submit' value = '선택 삭제'> </form> </td> </tr> </table>";
+	if (!$i) $div_string .= "<td width = '135px'> </td>";
+	$div_string .= "<td> <img class = 'b' src = 'img/기념일(일반).png' onclick = 'add_anni();' onmouseover = 'this.src = \"img/기념일(오버).png\";' onmouseout = 'this.src = \"img/기념일(일반).png\";' onmousedown = 'this.src = \"img/기념일(클릭).png\";' onmouseup = 'this.src = \"img/기념일(오버).png\";'> </td>";
+	if ($i) $div_string .= "<td> <input type = 'image' src = 'img/선택일정(일반).png' onmouseover = 'this.src = \"img/선택일정(오버).png\";' onmouseout = 'this.src = \"img/선택일정(일반).png\";' onmousedown = 'this.src = \"img/선택일정(클릭).png\";' onmouseup = 'this.src = \"img/선택일정(오버).png\";'> </form> </td> </tr> </table>";
 	else $div_string .= "</tr> </table>";
 
 	echo $div_string;
@@ -94,9 +90,12 @@ function display_list($date_now) {
 <textarea name = "content" rows = "8" cols = "47" style = "background-color : transparent; font-size : 15px; font-weight : bold; border : none;"></textarea> <br> <br>
 
 <table style = "margin : 0 auto;"> <tr> <td>
-<input type = "button" value = "취소" onclick = "document.getElementById('Add').style.visibility = 'hidden';" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td>
+
+<img src = "img/취소(일반).png" onclick = "document.getElementById('Add').style.visibility = 'hidden';" onmouseover = "this.src = 'img/취소(오버).png';" onmouseout = "this.src = 'img/취소(일반).png';" onmousedown = "this.src = 'img/취소(클릭).png';" onmouseup = "this.src = 'img/취소(오버).png';"> </td>
+
 <td> </td> <td>
-<input type = "submit" value = "등록" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td> </table>
+
+<input type = "image" src = "img/등록(일반).png" onmouseover = "this.src = 'img/등록(오버).png';" onmouseout = "this.src = 'img/등록(일반).png';" onmousedown = "this.src = 'img/등록(클릭).png';" onmouseup = "this.src = 'img/등록(오버).png';"> </td> </table>
 </form> </div>
 
 <div id = "Anni" style = "background-color : #ffffff; position : absolute; left : 400px; top : 200px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
@@ -132,9 +131,11 @@ echo $string;
 <textarea name = "content" rows = "8" cols = "47" style = "background-color : transparent; font-size : 15px; font-weight : bold; border : none;"></textarea> <br> <br>
 
 <table style = "margin : 0 auto;"> <tr> <td>
-<input type = "button" value = "취소" onclick = "document.getElementById('Anni').style.visibility = 'hidden';" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td>
+
+<img src = "img/취소(일반).png" onclick = "document.getElementById('Anni').style.visibility = 'hidden';" onmouseover = "this.src = 'img/취소(오버).png';" onmouseout = "this.src = 'img/취소(일반).png';" onmousedown = "this.src = 'img/취소(클릭).png';" onmouseup = "this.src = 'img/취소(오버).png';"> </td>
+
 <td> </td> <td>
-<input type = "submit" value = "기념일 추가" style = "font-size : 15px; font-weight : bold; float : right; width : 60px; height : 40px"> </td> </table>
+<input type = "image" src = "img/등록(일반).png" onmouseover = "this.src = 'img/등록(오버).png';" onmouseout = "this.src = 'img/등록(일반).png';" onmousedown = "this.src = 'img/등록(클릭).png';" onmouseup = "this.src = 'img/등록(오버).png';"> </td> </table>
 </form> </div>
 
 
