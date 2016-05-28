@@ -3,7 +3,7 @@
 <!DOCTYPE>
 <html>
 <head> <title> 일정 관리 페이지 </title> </head>
-<body style = "background-color : #fff1f1">
+<body style = "background-image : url('img/background.png'); background-repeat : repeat-x;">
 
 <script type = "text/javascript" src = "Calendar.js"> </script>
 <?php
@@ -42,7 +42,7 @@ echo $string;
 
 ?>
 
-<table style = "margin : 0 auto;"> <tr> <td style = "height : 100px"> </td> </tr><tr> <td valign = "top">
+<table style = "margin : 0 auto;"> <tr> <div style = "height : 130px"> <td valign = "top">
 <div id = "Cal" align = "left" style = "background-image : url('img/달력.png'); position : relative; width : 750px;"> </div> </td>
 <td valign = "top"> <table> <tr> <td colspan = "3"> <div style = "background-image : url('img/V.png'); height : 50px; margin-bottom : 10px"> </div> </td> </tr> 
 <tr> <td colspan = "3">
