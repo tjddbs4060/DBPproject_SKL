@@ -96,31 +96,39 @@ function display_list($date_now) {
 	$i = 0;
 
 	$div_string = "<h3 style = 'text-align : center; font-family : serif;'> <b>- ".$_GET['value']." -</b> </h3>";
-
-//일정이 있다면 출력
+//일정 출력
 	while ($arr_list = mysql_fetch_assoc($result)) {
-//폼 형식은 딱 한번만 실행하여 저장
-		if (!$i) $div_string .= "<form class = 'sch' id = 'menu' method = 'GET' action = 'del_sch.php'>";
-		$div_string .= "<font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']."</font><br>".$arr_list['content']."<input type = 'checkbox' name = '$i' value = '".$arr_list['sch_index']."' style = 'float : right;'> </p>";
-		$i++;
+		if (!$i) $div_string .= "<table class = 'sch' style = 'width : 300px;'>";
+		$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']."</font><br>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
+		$div_string .= "<img src = 'img/삭제(일반).png' onclick = 'window.location.replace(\"del_sch.php?value=".$_GET['value']."&index=".$arr_list['sch_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/삭제(오버).png\";' onmouseout = 'this.src = \"img/삭제(일반).png\";' onmousedown = 'this.src = \"img/삭제(클릭).png\";' onmouseup = 'this.src = \"img/삭제(오버).png\";'>";
+		$div_string .= "</td> <tr style = 'height : 10px'> </tr> </tr>";
+		$i = 1;
 	}
+	if ($i) $div_string .= "</table>";
 
 	$div_string .= "</td> </tr> <tr style = 'height : 20px'> </tr>";
 
 //해당하는 날의 기념일을 확인
 	$spl_date = explode("-", $date_now);
-	$query = "select content from anniversary where anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2];
+	$query = "select * from anniversary where anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2];
 	$result = mysql_query($query);
 
 //기념일이 있다면 출력
 	if (mysql_fetch_assoc($result)) {
 		$result = mysql_query($query);
 		$div_string .= "<tr> <td colspan = '3'> <div style = 'background-image : url(\"img/축하.png\"); height : 50px;'> </div> </td> </tr>";
-		$div_string .= '<tr> <td colspan = "3"> <div class = "sch" style = "width : 300px; border : 3px solid #ff4949; padding : 20px; word-wrap : break-word; line-height : 25px;">';
 
-		while ($arr_list = mysql_fetch_assoc($result))
-			$div_string .= $arr_list['content']."<br>";
-		$div_string .= "</div> </td> </tr>";
+		$div_string .= '<tr> <td colspan = "3"> <div class = "sch" style = "width : 300px; border : 3px solid #ff4949; padding : 20px; word-wrap : break-word; line-height : 25px;">';
+		$i = 0;
+
+		while ($arr_list = mysql_fetch_assoc($result)) {
+			if (!$i) $div_string .= "<table class = 'sch' style = 'width : 300px;'>";
+			$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
+			$div_string .= "<img src = 'img/삭제(일반).png' onclick = 'window.location.replace(\"del_anni.php?value=".$_GET['value']."&index=".$arr_list['anni_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/삭제(오버).png\";' onmouseout = 'this.src = \"img/삭제(일반).png\";' onmousedown = 'this.src = \"img/삭제(클릭).png\";' onmouseup = 'this.src = \"img/삭제(오버).png\";'>";
+			$div_string .= "</td> <tr style = 'height : 10px'> </tr> </tr>";
+			$i = 1;
+		}
+		if ($i) $div_string .= "</table>";
 	}
 
 	$div_string .= "<tr style = 'margin : 0 auto'> <td>";
@@ -128,13 +136,11 @@ function display_list($date_now) {
 	$div_string .= "<input type = 'hidden' name = 'value' value = '$date_now'>";
 	$div_string .= "<input type = 'hidden' name = 'Y' value = ".$_GET['Y'].">";
 	$div_string .= "<input type = 'hidden' name = 'M' value = ".$_GET['M'].">";
-	if (!$i) $div_string .= "<td width = '135px'> </td>";
-	$div_string .= "<td> <img class = 'b' src = 'img/기념일(일반).png' onclick = 'add_anni();' onmouseover = 'this.src = \"img/기념일(오버).png\";' onmouseout = 'this.src = \"img/기념일(일반).png\";' onmousedown = 'this.src = \"img/기념일(클릭).png\";' onmouseup = 'this.src = \"img/기념일(오버).png\";'> </td>";
-	if ($i) $div_string .= "<td> <input type = 'image' src = 'img/선택일정(일반).png' onmouseover = 'this.src = \"img/선택일정(오버).png\";' onmouseout = 'this.src = \"img/선택일정(일반).png\";' onmousedown = 'this.src = \"img/선택일정(클릭).png\";' onmouseup = 'this.src = \"img/선택일정(오버).png\";'> </form> </td> </tr> </table>";
-	else $div_string .= "</tr> </table>";
+	$div_string .= "<td width = '135px'> </td>";
+	$div_string .= "<td> <img src = 'img/기념일(일반).png' onclick = 'add_anni();' onmouseover = 'this.src = \"img/기념일(오버).png\";' onmouseout = 'this.src = \"img/기념일(일반).png\";' onmousedown = 'this.src = \"img/기념일(클릭).png\";' onmouseup = 'this.src = \"img/기념일(오버).png\";'> </td>";
+	$div_string .= "</tr> </table>";
 
 	echo $div_string;
-	print_r($arr_list);
 }
 
 ?>
