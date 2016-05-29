@@ -79,7 +79,7 @@ echo $string;
 ?>
 
 <table style = "margin : 0 auto;"> <tr> <div style = "height : 130px"> <td valign = "top">
-<div id = "Cal" align = "left" style = "background-image : url('img/달력.png'); position : relative; width : 750px;"> </div> </td>
+<div id = "Cal" align = "left" style = "background-image : url('img/달력.png'); position : relative; width : 750px; background-repeat : no-repeat"> </div> </td>
 <td valign = "top"> <table> <tr> <td colspan = "3"> <div style = "background-image : url('img/V.png'); height : 50px; margin-bottom : 10px"> </div> </td> </tr> 
 <tr> <td colspan = "3">
 <div id = "View" align = "left" style = "position : relative; width : 300px; border : 3px solid #ff4949; padding-left : 20px; padding-right : 20px; word-wrap : break-word;">
