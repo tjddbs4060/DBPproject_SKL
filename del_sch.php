@@ -14,7 +14,7 @@ function del_sch() {
 	reset($_GET);
 //받아온 값이 일정이면 살제 실행
 	while (is_int(key($_GET))) {
-		$query = "delete from schedule where sch_date = '".$_GET['value']."' and content = '".$_GET[key($_GET)]."';";	//id 추가할거
+		$query = "delete from schedule where sch_date = '".$_GET['value']."' and sch_index = '".$_GET[key($_GET)]."';";	//id 추가할거
 		mysql_query($query);
 		next($_GET);
 	}

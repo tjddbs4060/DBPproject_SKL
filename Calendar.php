@@ -91,7 +91,7 @@ if ($_GET['value']) display_list($_GET['value']);
 //일정 내용 확인하는 함수
 function display_list($date_now) {
 //해당하는 날과 id(미구현)를 확인하여 일정 출력
-	$query = "select content from schedule where sch_date = '$date_now'";	//아이디 추가되면 where 뒤에 추가할 것
+	$query = "select * from schedule where sch_date = '$date_now' order by sch_start_time";	//아이디 추가되면 where 뒤에 추가할 것
 	$result = mysql_query($query);
 	$i = 0;
 
@@ -101,11 +101,11 @@ function display_list($date_now) {
 	while ($arr_list = mysql_fetch_assoc($result)) {
 //폼 형식은 딱 한번만 실행하여 저장
 		if (!$i) $div_string .= "<form class = 'sch' id = 'menu' method = 'GET' action = 'del_sch.php'>";
-		$div_string .= $arr_list['content']."<input type = 'checkbox' name = '$i' value = '".$arr_list['content']."' style = 'float : right;'> <br>";
-		$i = 1;
+		$div_string .= "<font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']."</font><br>".$arr_list['content']."<input type = 'checkbox' name = '$i' value = '".$arr_list['sch_index']."' style = 'float : right;'> </p>";
+		$i++;
 	}
 
-	$div_string .= "<br> </td> </tr> <tr style = 'height : 20px'> </tr>";
+	$div_string .= "</td> </tr> <tr style = 'height : 20px'> </tr>";
 
 //해당하는 날의 기념일을 확인
 	$spl_date = explode("-", $date_now);
@@ -149,6 +149,55 @@ function display_list($date_now) {
 <input type = "hidden" name = "Y" value = "<?php echo $_GET['Y']; ?>">
 <input type = "hidden" name = "M" value = "<?php echo $_GET['M']; ?>">
 <table class = "normal" border = "1px">
+<tr> <td> <div style = "width : 50px; text-align : center"> 시작 시간 </div> </td> <td style = "text-align : center;">
+
+<?php
+
+$string = "<select class = 'normal' name = 's_hour' style = 'background : none;'>";
+for ($i = 0; $i < 24; $i++) {
+	$string .= "<option class = 'normal' value = '$i'>";
+	if ($i == 0) $string .= "AM 12 시 </option>";
+	else if ($i/12 < 1) $string .= "AM $i 시 </option>";
+	else if ($i == 12) $string .= "PM $i 시 </option>";
+	else $string .= "PM ".($i%12)." 시 </option>";
+}
+$string .= "</select>&nbsp&nbsp";
+
+$string .= "<select class = 'normal' name = 's_minute' style = 'background : none;'>";
+for ($i = 0; $i < 60; $i++)
+	$string .= "<option class = 'normal' value = '$i'> $i 분 </option>";
+$string .= "</select>";
+
+echo $string;
+
+?>
+
+</td> </tr>
+<tr> <td> <div style = "width : 50px; text-align : center"> 종료 시간 </div> </td> <td style = "text-align : center;">
+
+<?php
+
+$string = "<select class = 'normal' name = 'f_hour' style = 'background : none;'>";
+for ($i = 0; $i < 24; $i++) {
+	$string .= "<option class = 'normal' value = '$i'>";
+	if ($i == 0) $string .= "AM 12 시 </option>";
+	else if ($i/12 < 1) $string .= "AM $i 시 </option>";
+	else if ($i == 12) $string .= "PM $i 시 </option>";
+	else $string .= "PM ".($i%12)." 시 </option>";
+}
+$string .= "</select>&nbsp&nbsp";
+
+$string .= "<select class = 'normal' name = 'f_minute' style = 'background : none;'>";
+for ($i = 0; $i < 60; $i++)
+	$string .= "<option class = 'normal' value = '$i'> $i 분 </option>";
+$string .= "</select>";
+
+echo $string;
+
+?>
+
+</td> </tr>
+
 <tr> <td> <div style = "width : 50px; text-align : center"> 일정 내용 </div> </td> <td>
 <textarea name = "content" rows = "6" cols = "45" style = "background-color : transparent; border : none;"></textarea>
 </td> </tr> </table>
@@ -180,7 +229,7 @@ $string .= "</select>&nbsp&nbsp";
 $string .= "<select class = 'normal' name = 'day' style = 'background : none'>";
 for ($i = 1; $i <= 31; $i++)
 	$string .= "<option class = 'normal' value = '$i'> $i </option>";
-$string .= "</select>&nbsp&nbsp";
+$string .= "</select>";
 
 echo $string;
 
