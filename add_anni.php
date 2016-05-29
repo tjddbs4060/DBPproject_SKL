@@ -5,7 +5,7 @@ include "connect_today.php";
 if ($_GET['content']) add_anni($_GET['value'], $_GET['content']);
 else {
 	@mysql_close();
-	echo "<script> alert('기념일을 입력해주세요.'); window.location.replace('Calendar.php?value=".$_GET['value']."');</script>";
+	echo "<script> alert('기념일을 입력해주세요.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 function add_anni($date_now, $content) {
@@ -14,6 +14,6 @@ function add_anni($date_now, $content) {
 
 	@mysql_close();
 
-	echo "<script> alert('기념일이 추가되었습니다.'); window.location.replace('Calendar.php?value=".$_GET['value']."');</script>";
+	echo "<script> alert('기념일이 추가되었습니다.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 ?>

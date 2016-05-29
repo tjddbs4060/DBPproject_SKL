@@ -5,7 +5,7 @@ include "connect_today.php";
 if (is_int(key($_GET))) del_sch();
 else {
 	@mysql_close();
-	echo "<script> alert('일정을 선택해주세요.'); window.location.replace('Calendar.php?value=".$_GET['value']."');</script>";
+	echo "<script> alert('일정을 선택해주세요.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 function del_sch() {
@@ -18,7 +18,7 @@ function del_sch() {
 
 	@mysql_close();
 
-	echo "<script> alert('일정이 삭제되었습니다.'); window.location.replace('Calendar.php?value=".$_GET['value']."');</script>";
+	echo "<script> alert('일정이 삭제되었습니다.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 ?>
