@@ -1,7 +1,8 @@
 <?php
-
+//connect_today.php 로드
 include "connect_today.php";
 
+//내용이 있으면 실행 없으면 alert 출력
 if ($_GET['content']) add_content($_GET['value'], $_GET['content']);
 else {
 	@mysql_close();
@@ -9,6 +10,8 @@ else {
 }
 
 function add_content($date_now, $content) {
+
+//받아온 날짜 분할 후, 월과 일이 한자리이면 두자리로 늘려줌
 	$date_now = explode("-", $date_now);
 	if ($date_now[1] < 10) $date_now[1] = "0".$date_now[1];
 	if ($date_now[2] < 10) $date_now[2] = "0".$date_now[2];
@@ -18,6 +21,7 @@ function add_content($date_now, $content) {
 
 	@mysql_close();
 
+//쿼리에 일정 추가 후 alert 출력
 	echo "<script> alert('일정이 추가되었습니다.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 ?>

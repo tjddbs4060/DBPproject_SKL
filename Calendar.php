@@ -9,9 +9,13 @@
 <script type = "text/javascript" src = "Calendar.js"> </script>
 
 <?php
+//php문으로 html에 자바스크립트를 출력하여 자바스크립트처럼 사용
 $string = '<script type = "text/javascript">';
+
+//페이지가 뜨면 자동으로 실행되는 함수
 $string .= 'window.onload = function() {';
 
+//받아온 값을 Calendar.js 파일에 있는 전역변수에 저장
 $string .= "ymd = '".$_GET['value']."';";
 $string .= "y_now = ".$_GET['Y'].";";
 $string .= "m_now = ".$_GET['M'].";";
@@ -22,16 +26,22 @@ $string .= '</script>';
 
 echo $string;
 
+//해당하는 id(아직 안함)와 없는 id의 모든 기념일의 정보 저장
 $query = "select * from anniversary where id is null order by anni_mon, anni_day";
 $result = mysql_query($query);
 
 $string = "<script type = 'text/javascript'>";
 $string .= "function anni_col() {";
 
+//저장한 정보를 anni라는 변수에 배열로 저장
 $string .= "var anni = new Array(";
 
+//저장한 기념일의 정보를 한줄씩 출력하여 배열에 순서대로 저장
 while ($list = mysql_fetch_assoc($result))
 	$string .= $list['anni_mon'].", ".$list['anni_day'].",'".$list['content']."',";
+
+
+//배열의 마지막의 ,(콤마)를 제거
 $string = substr($string, 0, strlen($string)-1);
 $string .= ");";
 $string .= "return anni;";
@@ -48,11 +58,13 @@ $string .= "function sch_num_col() {";
 
 $string .= "var sch_num = new Array(";
 
-for ($i = 1; $i <= $last_day[$_GET['M']]; $i++) {
+//달력에 출력되어 있는 달의 일정 갯수들을 모두 저장
+for ($i = 1; $i <= $last_day[$_GET['M']-1]; $i++) {
 	$query = "select * from schedule where sch_date = '".$_GET['Y']."-".$_GET['M']."-".$i."'";
 	$result = mysql_query($query);
 	$count = 0;
 
+//일정 갯수를 하나하나 확인
 	while ($list = mysql_fetch_row($result)) $count++;
 
 	$string .= "$count,";
@@ -73,28 +85,34 @@ echo $string;
 <div id = "View" align = "left" style = "position : relative; width : 300px; border : 3px solid #ff4949; padding-left : 20px; padding-right : 20px; word-wrap : break-word;">
 
 <?php
-
+//전달되어있는 value 값이 있으면 실행
 if ($_GET['value']) display_list($_GET['value']);
 
+//일정 내용 확인하는 함수
 function display_list($date_now) {
+//해당하는 날과 id(미구현)를 확인하여 일정 출력
 	$query = "select content from schedule where sch_date = '$date_now'";	//아이디 추가되면 where 뒤에 추가할 것
 	$result = mysql_query($query);
 	$i = 0;
 
 	$div_string = "<h3 style = 'text-align : center; font-family : serif;'> <b>- ".$_GET['value']." -</b> </h3>";
 
+//일정이 있다면 출력
 	while ($arr_list = mysql_fetch_assoc($result)) {
+//폼 형식은 딱 한번만 실행하여 저장
 		if (!$i) $div_string .= "<form class = 'sch' id = 'menu' method = 'GET' action = 'del_sch.php'>";
 		$div_string .= $arr_list['content']."<input type = 'checkbox' name = '$i' value = '".$arr_list['content']."' style = 'float : right;'> <br>";
-		$i++;
+		$i = 1;
 	}
 
 	$div_string .= "<br> </td> </tr> <tr style = 'height : 20px'> </tr>";
 
+//해당하는 날의 기념일을 확인
 	$spl_date = explode("-", $date_now);
 	$query = "select content from anniversary where anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2];
 	$result = mysql_query($query);
 
+//기념일이 있다면 출력
 	if (mysql_fetch_assoc($result)) {
 		$result = mysql_query($query);
 		$div_string .= "<tr> <td colspan = '3'> <div style = 'background-image : url(\"img/축하.png\"); height : 50px;'> </div> </td> </tr>";
@@ -148,7 +166,7 @@ function display_list($date_now) {
 <form method = "get" action = "add_anni.php">
 <tr> <td> <div style = "width : 60px; text-align : center;"> 날짜<br>입력 </div> </td> <td style = "text-align : center;">
 <?php
-
+//select문 출력(년/월/일)
 $string = "<select class = 'normal' name = 'year' style = 'background : none;'>";
 for ($i = $_GET['Y']-30; $i < $_GET['Y']+30; $i++)
 	$string .= "<option class = 'normal' value = '$i'> $i </option>";
