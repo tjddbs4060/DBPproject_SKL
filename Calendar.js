@@ -48,9 +48,9 @@ var num_week = Math.ceil((last_day[m_now-1]+start_week)/7);
 var day = 1;	//표를 채워 넣는데 사용할 변수
 
 var string_cal = '<table>';
-string_cal += '<tr height = "100px"> <th colspan = "1" width = "100px" onclick = "Cal_down();"> down </th>';
+string_cal += '<tr height = "100px"> <th colspan = "1" width = "100px" onclick = "Cal_down();">'+(m_now-1)+'월 </th>';
 string_cal += ('<th colspan = "5" width = "500px"> <font class = "tit">'+y_now+'년 '+m_now+'월 </th>');
-string_cal += '<th colspan = "1" width = "100px" onclick = "Cal_up();"> up </th> </tr>';
+string_cal += '<th colspan = "1" width = "100px" onclick = "Cal_up();">'+(m_now+1)+'월 </th> </tr>';
 string_cal += '<tr class = "normal"> <th height = "50px"> <font color = "#FF0000"> 일 </th>';
 string_cal += '<th> 월 </th> <th> 화 </th> <th> 수 </th> <th> 목 </th> <th> 금 </th>';
 string_cal += '<th> <font color = "#0000FF"> 토 </th> </tr>';
