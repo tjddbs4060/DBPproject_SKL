@@ -28,7 +28,7 @@ function add_content($date_now, $content) {
 	if ($f_hour < 10) $f_hour = "0".$f_hour;
 	if ($f_minute < 10) $f_minute = "0".$f_minute;
 
-	$query = "insert into schedule (id, friend_range, cheer_num, sch_date, sch_start_time, sch_finish_time, content) values ('qwer', 1, 0, $date_now[0]$date_now[1]$date_now[2], ".$s_hour.$s_minute."00, ".$f_hour.$f_minute."00, '$content')";
+	$query = "insert into schedule (id, friend_range, cheer_num, sch_date, sch_start_time, sch_finish_time, content) values ('qwer', ".$_GET['range'].", 0, $date_now[0]$date_now[1]$date_now[2], ".$s_hour.$s_minute."00, ".$f_hour.$f_minute."00, '$content')";
 	mysql_query($query);
 
 	@mysql_close();

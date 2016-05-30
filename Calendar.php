@@ -99,7 +99,16 @@ function display_list($date_now) {
 //일정 출력
 	while ($arr_list = mysql_fetch_assoc($result)) {
 		if (!$i) $div_string .= "<table class = 'sch' style = 'width : 300px;'>";
-		$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']."</font><br>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
+		$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']." / ";
+
+		switch($arr_list['friend_range']) {
+		case 0 : $div_string .= "나만보기"; break;
+		case 1 : $div_string .= "친구에게만"; break;
+		case 2 : $div_string .= "모두에게"; break;
+		default : break;
+		}
+
+		$div_string .= "</font><br>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
 		$div_string .= "<img src = 'img/삭제(일반).png' onclick = 'window.location.replace(\"del_sch.php?value=".$_GET['value']."&index=".$arr_list['sch_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/삭제(오버).png\";' onmouseout = 'this.src = \"img/삭제(일반).png\";' onmousedown = 'this.src = \"img/삭제(클릭).png\";' onmouseup = 'this.src = \"img/삭제(오버).png\";'>";
 		$div_string .= "</td> <tr style = 'height : 10px'> </tr> </tr>";
 		$i = 1;
@@ -147,7 +156,7 @@ function display_list($date_now) {
 
 </div> </td> </tr> </table>
 
-<div id = "Add" style = "background-color : #ffc8c8; position : absolute; left : 400px; top : 200px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
+<div id = "Add" style = "background-color : #ffc8c8; position : absolute; left : 400px; top : 200px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden;">
 
 <form method = "get" action = "add_sch.php">
 
@@ -205,8 +214,14 @@ echo $string;
 </td> </tr>
 
 <tr> <td> <div style = "width : 50px; text-align : center"> 일정 내용 </div> </td> <td>
-<textarea name = "content" rows = "6" cols = "45" style = "background-color : transparent; border : none;"></textarea>
-</td> </tr> </table>
+<textarea name = "content" rows = "6" cols = "43" style = "background-color : transparent; border : none;"></textarea>
+
+</td> </tr> <tr class = 'normal'> <td> <div style = "width : 60px; text-align : center;"> 공개 범위 설정 </div> </td> <td style = "text-align : center;">
+<select name = "range" style = "background : none;">
+<option value = "0"> 나만 보기 </option>
+<option value = "1"> 친구에게만 </option>
+<option value = "2"> 모두에게 </option> </td></tr> </table>
+
 <table style = "margin : 0 auto;"> <tr> <td>
 
 <img src = "img/취소(일반).png" onclick = "document.getElementById('Add').style.visibility = 'hidden';" onmouseover = "this.src = 'img/취소(오버).png';" onmouseout = "this.src = 'img/취소(일반).png';" onmousedown = "this.src = 'img/취소(클릭).png';" onmouseup = "this.src = 'img/취소(오버).png';"> </td>
@@ -216,7 +231,7 @@ echo $string;
 <input type = "image" src = "img/등록(일반).png" onmouseover = "this.src = 'img/등록(오버).png';" onmouseout = "this.src = 'img/등록(일반).png';" onmousedown = "this.src = 'img/등록(클릭).png';" onmouseup = "this.src = 'img/등록(오버).png';"> </td> </table>
 </form> </div>
 
-<div id = "Anni" style = "background-color : #ffc8c8; position : absolute; left : 400px; top : 200px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
+<div id = "Anni" style = "background-color : #ffc8c8; position : absolute; left : 400px; top : 300px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
 <table class = "normal" border = "1px">
 <form method = "get" action = "add_anni.php">
 <tr> <td> <div style = "width : 60px; text-align : center;"> 날짜<br>입력 </div> </td> <td style = "text-align : center;">
