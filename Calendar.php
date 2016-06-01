@@ -1,4 +1,4 @@
-<?php require("connect_today.php"); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE>
 <html>
@@ -27,7 +27,7 @@ $string .= '</script>';
 echo $string;
 
 //해당하는 id(아직 안함)와 없는 id의 모든 기념일의 정보 저장
-$query = "select * from anniversary where id is null order by anni_mon, anni_day";
+$query = "select * from anniversary where id is null or id = '".$_SESSION['userid']."' order by anni_mon, anni_day";
 $result = mysql_query($query);
 
 $string = "<script type = 'text/javascript'>";
@@ -60,7 +60,7 @@ $string .= "var sch_num = new Array(";
 
 //달력에 출력되어 있는 달의 일정 갯수들을 모두 저장
 for ($i = 1; $i <= $last_day[$_GET['M']-1]; $i++) {
-	$query = "select * from schedule where sch_date = '".$_GET['Y']."-".$_GET['M']."-".$i."'";
+	$query = "select * from schedule where id = '".$_SESSION['userid']."' and sch_date = '".$_GET['Y']."-".$_GET['M']."-".$i."'";
 	$result = mysql_query($query);
 	$count = 0;
 
@@ -91,7 +91,7 @@ if ($_GET['value']) display_list($_GET['value']);
 //일정 내용 확인하는 함수
 function display_list($date_now) {
 //해당하는 날과 id(미구현)를 확인하여 일정 출력
-	$query = "select * from schedule where sch_date = '$date_now' order by sch_start_time";	//아이디 추가되면 where 뒤에 추가할 것
+	$query = "select * from schedule where id = '".$_SESSION['userid']."' and sch_date = '$date_now' order by sch_start_time";	//아이디 추가되면 where 뒤에 추가할 것
 	$result = mysql_query($query);
 	$i = 0;
 
@@ -119,7 +119,7 @@ function display_list($date_now) {
 
 //해당하는 날의 기념일을 확인
 	$spl_date = explode("-", $date_now);
-	$query = "select * from anniversary where anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2];
+	$query = "select * from anniversary where id = '".$_SESSION['userid']."' and anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2];
 	$result = mysql_query($query);
 
 //기념일이 있다면 출력
