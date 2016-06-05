@@ -1,6 +1,7 @@
 <?php
 //connect_today.php 로드
 include "connect_today.php";
+session_start();
 
 //내용을 입력하면 실행, 입력하지 않으면 alert 출력
 if ($_GET['content']) add_anni($_GET['value'], $_GET['content']);
@@ -10,7 +11,7 @@ else {
 }
 
 function add_anni($date_now, $content) {
-	$query = "insert into anniversary (anni_year, anni_mon, anni_day, content) values (".$_GET['year'].", ".$_GET['mon'].", ".$_GET['day'].", '$content')";
+	$query = "insert into anniversary (anni_year, anni_mon, anni_day, content, id) values (".$_GET['year'].", ".$_GET['mon'].", ".$_GET['day'].", '$content', '".$_SESSION['userid']."')";
 	mysql_query($query);
 
 	@mysql_close();

@@ -47,13 +47,80 @@ var num_week = Math.ceil((last_day[m_now-1]+start_week)/7);
 
 var day = 1;	//표를 채워 넣는데 사용할 변수
 
-var string_cal = '<table>';
-string_cal += '<tr height = "100px"> <th colspan = "1" width = "100px" onclick = "Cal_down();">'+(m_now-1)+'월 </th>';
-string_cal += ('<th colspan = "5" width = "500px"> <font class = "tit">'+y_now+'년 '+m_now+'월 </th>');
-string_cal += '<th colspan = "1" width = "100px" onclick = "Cal_up();">'+(m_now+1)+'월 </th> </tr>';
-string_cal += '<tr class = "normal"> <th height = "50px"> <font color = "#FF0000"> 일 </th>';
-string_cal += '<th> 월 </th> <th> 화 </th> <th> 수 </th> <th> 목 </th> <th> 금 </th>';
-string_cal += '<th> <font color = "#0000FF"> 토 </th> </tr>';
+var m_now_en;
+var m_next;
+var m_before;
+switch(m_now) {
+	case 1: 
+		m_now_en = 'January';
+		m_next = 'Feb';
+		m_before = 'Dec';
+		break;
+	case 2: 
+		m_now_en = 'February';
+		m_next = 'Mar';
+		m_before = 'Jan';
+		break;
+	case 3: 
+		m_now_en = 'March';
+		m_next = 'Apr';
+		m_before = 'Feb';
+		break;
+	case 4: 
+		m_now_en = 'April';
+		m_next = 'May';
+		m_before = 'Mar';
+		break;
+	case 5: 
+		m_now_en = 'May';
+		m_next = 'Jun';
+		m_before = 'Apr';
+		break;
+	case 6: 
+		m_now_en = 'June';
+		m_next = 'Jul';
+		m_before = 'May';
+		break;
+	case 7: 
+		m_now_en = 'July';
+		m_next = 'Aug';
+		m_before = 'Jun';
+		break;
+	case 8: 
+		m_now_en = 'August';
+		m_next = 'Sep';
+		m_before = 'Jul';
+		break;
+	case 9: 
+		m_now_en = 'September';
+		m_next = 'Oct';
+		m_before = 'Aug';
+		break;
+	case 10: 
+		m_now_en = 'October';
+		m_next = 'Nov';
+		m_before = 'Sep';
+		break;
+	case 11: 
+		m_now_en = 'November';
+		m_next = 'Dec';
+		m_before = 'Oct';
+		break;
+	case 12: 
+		m_now_en = 'December';
+		m_next = 'Jan';
+		m_before = 'Nov';
+		break;
+}
+
+var string_cal = '<table style = "border-collapse: collapse; border : #5ac7db 5px solid;">';
+string_cal += '<tr height = "100px"> <td colspan = "2" width = "200px" style = "text-align : left; padding-left : 30px"> <font class = "tit">'+y_now+'</font></td>';
+string_cal += '<td class = "tit" colspan = "3" width = "300px" style = "text-align : center"> <font class = "tit" color = "#e42fdb"> '+m_now_en+'</font> </td>';
+string_cal += '<td colspan = "1" width = "100px" style = "text-align : center;" onclick = "Cal_down();"> <b>'+m_before+'</b> </td>';
+string_cal += '<td colspan = "1" width = "100px" style = "text-align : center;" onclick = "Cal_up();"> <b>'+m_next+'</b> </td> </tr>';
+string_cal += '<tr class = "day" valign = "top" style = "text-align : center;"> <td height = "30px"> <font color = "#FF0000"> Sun </td>';
+string_cal += '<td> Mon </td> <td> Tue </td> <td> Wed </td> <td> Tur </td> <td> Fri </td>';
+string_cal += '<td> <font color = "#0000FF"> Sat </td> </tr>';
 
 //기념일과 해당 달의 일정 갯수를 배열로 가져옴
 var anni_now = anni_col();
@@ -71,14 +138,14 @@ for (var i = 0; i < anni_now.length; i += 3) {
 
 //달력 일 그리기
 for (var i = 0; i < num_week; i++) {
-	string_cal += '<tr class = "normal" height = "100px">';
+	string_cal += '<tr class = "normal" style = "height : 103px;">';
 
 	for (var j = 0; j < 7; j++) {
 		string_date = y_now+"-"+m_now+"-"+day;
 		string_cal += "<td";
 
 		if (!((i == 0 && j < start_week) || last_day[m_now-1] < day)) {
-			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'white-space : nowrap; overflow : hidden; text-overflow : ellipsis; vertical-align : top; text-align : left; min-width : 100px; min-height : 100px; max-width : 100px; max-height : 100px;'>");
+			string_cal += (" id = '" + string_date + "' onclick = 'View_list(\"" + string_date + "\");' style = 'white-space : nowrap; overflow : hidden; text-overflow : ellipsis; vertical-align : top; text-align : left; min-width : 101px; max-width : 101px;'>");
 
 			if (j == 0) string_cal += '<font color = "#FF0000">';
 			else if (j == 6) string_cal += '<font color = "#0000FF">';

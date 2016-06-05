@@ -4,7 +4,7 @@
 <html>
 <head> <title> 일정 관리 페이지 </title> </head>
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
-<body style = "background-image : url('img/background.png'); background-repeat : repeat-x;">
+<body style = "background-color : #f0f0f0; margin : 0 auto;">
 
 <script type = "text/javascript" src = "Calendar.js"> </script>
 
@@ -75,14 +75,23 @@ $string .= ");";
 $string .= "return sch_num; } </script>";
 
 echo $string;
-
 ?>
 
-<table style = "margin : 0 auto;"> <tr> <div style = "height : 130px"> <td valign = "top">
-<div id = "Cal" align = "left" style = "background-image : url('img/달력.png'); position : relative; width : 750px; background-repeat : no-repeat"> </div> </td>
+<table width = "100%" class = "main"> <tr> <td>
+	<div style = "text-align : left; margin-left : 20px;">
+		<img src = "img/logo.png" width = "100px" height = "50px">
+	</div> </td>
+	<td align : right> <div style = "text-align : right; margin-right : 20px;">
+		<img src = "img/home.png" width = "50px" height = "50px" onclick="location.href='http://localhost/main.php'">
+		<img src = "img/friend_menu.png" width = "50px" height = "50px">
+		<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = "window.location.reload();" >
+</div> </td> </tr> </table>
+
+<table style = "margin : 0 auto;"> <tr> <td valign = "top">
+<div id = "Cal" align = "left" style = "background-image : url('img/Cal.png'); position : relative; width : 730px; background-repeat : no-repeat; margin-right : 30px"> </div> </td>
 <td valign = "top"> <table> <tr> <td colspan = "3"> <div style = "background-image : url('img/V.png'); height : 50px; margin-bottom : 10px"> </div> </td> </tr> 
 <tr> <td colspan = "3">
-<div id = "View" align = "left" style = "position : relative; width : 300px; border : 3px solid #ff4949; padding-left : 20px; padding-right : 20px; word-wrap : break-word;">
+<div id = "View" align = "left" style = "background-color : #ffffff; position : relative; width : 300px; border : 3px solid #5ac7db; padding-left : 20px; padding-right : 20px; word-wrap : break-word;">
 
 <?php
 //전달되어있는 value 값이 있으면 실행
@@ -102,14 +111,14 @@ function display_list($date_now) {
 		$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']." / ";
 
 		switch($arr_list['friend_range']) {
-		case 0 : $div_string .= "나만보기"; break;
-		case 1 : $div_string .= "친구에게만"; break;
-		case 2 : $div_string .= "모두에게"; break;
-		default : break;
+			case 0 : $div_string .= "나만보기"; break;
+			case 1 : $div_string .= "친구에게만"; break;
+			case 2 : $div_string .= "모두에게"; break;
+			default : break;
 		}
 
 		$div_string .= "</font><br>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
-		$div_string .= "<img src = 'img/삭제(일반).png' onclick = 'window.location.replace(\"del_sch.php?value=".$_GET['value']."&index=".$arr_list['sch_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/삭제(오버).png\";' onmouseout = 'this.src = \"img/삭제(일반).png\";' onmousedown = 'this.src = \"img/삭제(클릭).png\";' onmouseup = 'this.src = \"img/삭제(오버).png\";'>";
+		$div_string .= "<img src = 'img/delete(default).png' onclick = 'window.location.replace(\"del_sch.php?value=".$_GET['value']."&index=".$arr_list['sch_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/delete(over).png\";' onmouseout = 'this.src = \"img/delete(default).png\";'>";
 		$div_string .= "</td> <tr style = 'height : 10px'> </tr> </tr>";
 		$i = 1;
 	}
@@ -119,21 +128,24 @@ function display_list($date_now) {
 
 //해당하는 날의 기념일을 확인
 	$spl_date = explode("-", $date_now);
-	$query = "select * from anniversary where id = '".$_SESSION['userid']."' and anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2];
+	$query = "select * from anniversary where (id = '".$_SESSION['userid']."' or id is null) and anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2]." order by id";
 	$result = mysql_query($query);
 
 //기념일이 있다면 출력
 	if (mysql_fetch_assoc($result)) {
 		$result = mysql_query($query);
-		$div_string .= "<tr> <td colspan = '3'> <div style = 'background-image : url(\"img/축하.png\"); height : 50px;'> </div> </td> </tr>";
+		$div_string .= "<tr> <td colspan = '3'> <div style = 'background-image : url(\"img/congration.png\"); height : 50px;'> </div> </td> </tr>";
 
-		$div_string .= '<tr> <td colspan = "3"> <div class = "sch" style = "width : 300px; border : 3px solid #ff4949; padding : 20px; word-wrap : break-word; line-height : 25px;">';
+		$div_string .= '<tr> <td colspan = "3"> <div class = "sch" style = "background-color : #ffffff; width : 300px; border : 3px solid #5ac7db; padding : 20px; word-wrap : break-word; line-height : 25px;">';
 		$i = 0;
 
 		while ($arr_list = mysql_fetch_assoc($result)) {
 			if (!$i) $div_string .= "<table class = 'sch' style = 'width : 300px;'>";
-			$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
-			$div_string .= "<img src = 'img/삭제(일반).png' onclick = 'window.location.replace(\"del_anni.php?value=".$_GET['value']."&index=".$arr_list['anni_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/삭제(오버).png\";' onmouseout = 'this.src = \"img/삭제(일반).png\";' onmousedown = 'this.src = \"img/삭제(클릭).png\";' onmouseup = 'this.src = \"img/삭제(오버).png\";'>";
+
+			if ($arr_list['id'] == null) $div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
+			else $div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['anni_year']."-".$arr_list['anni_mon']."-".$arr_list['anni_day']."<br> </font>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
+
+			$div_string .= "<img src = 'img/delete(default).png' onclick = 'window.location.replace(\"del_anni.php?value=".$_GET['value']."&index=".$arr_list['anni_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/delete(over).png\";' onmouseout = 'this.src = \"img/delete(default).png\";'>";
 			$div_string .= "</td> <tr style = 'height : 10px'> </tr> </tr>";
 			$i = 1;
 		}
@@ -141,12 +153,12 @@ function display_list($date_now) {
 	}
 
 	$div_string .= "<tr style = 'margin : 0 auto'> <td>";
-	$div_string .= "<img src = 'img/일정추가(일반).png' onclick = 'add_sch();' onmouseover = 'this.src = \"img/일정추가(오버).png\";' onmouseout = 'this.src = \"img/일정추가(일반).png\";' onmousedown = 'this.src = \"img/일정추가(클릭).png\";' onmouseup = 'this.src = \"img/일정추가(오버).png\";'> </td>";	//수정 페이지로 넘어가는 버튼
+	$div_string .= "<img src = 'img/sch(default).png' onclick = 'add_sch();' onmouseover = 'this.src = \"img/sch(over).png\";' onmouseout = 'this.src = \"img/sch(default).png\";'> </td>";	//수정 페이지로 넘어가는 버튼
 	$div_string .= "<input type = 'hidden' name = 'value' value = '$date_now'>";
 	$div_string .= "<input type = 'hidden' name = 'Y' value = ".$_GET['Y'].">";
 	$div_string .= "<input type = 'hidden' name = 'M' value = ".$_GET['M'].">";
-	$div_string .= "<td width = '135px'> </td>";
-	$div_string .= "<td> <img src = 'img/기념일(일반).png' onclick = 'add_anni();' onmouseover = 'this.src = \"img/기념일(오버).png\";' onmouseout = 'this.src = \"img/기념일(일반).png\";' onmousedown = 'this.src = \"img/기념일(클릭).png\";' onmouseup = 'this.src = \"img/기념일(오버).png\";'> </td>";
+	$div_string .= "<td width = '70px'> </td>";
+	$div_string .= "<td> <img src = 'img/anni(default).png' onclick = 'add_anni();' onmouseover = 'this.src = \"img/anni(over).png\";' onmouseout = 'this.src = \"img/anni(default).png\";'> </td>";
 	$div_string .= "</tr> </table>";
 
 	echo $div_string;
@@ -156,7 +168,7 @@ function display_list($date_now) {
 
 </div> </td> </tr> </table>
 
-<div id = "Add" style = "background-color : #ffc8c8; position : absolute; left : 400px; top : 200px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden;">
+<div id = "Add" style = "background-color : #ffffff; position : absolute; left : 400px; top : 200px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden;">
 
 <form method = "get" action = "add_sch.php">
 
@@ -224,14 +236,14 @@ echo $string;
 
 <table style = "margin : 0 auto;"> <tr> <td>
 
-<img src = "img/취소(일반).png" onclick = "document.getElementById('Add').style.visibility = 'hidden';" onmouseover = "this.src = 'img/취소(오버).png';" onmouseout = "this.src = 'img/취소(일반).png';" onmousedown = "this.src = 'img/취소(클릭).png';" onmouseup = "this.src = 'img/취소(오버).png';"> </td>
+<img src = "img/cancle(default).png" onclick = "document.getElementById('Add').style.visibility = 'hidden';" onmouseover = "this.src = 'img/cancle(over).png';" onmouseout = "this.src = 'img/cancle(default).png';"> </td>
 
 <td> </td> <td>
 
-<input type = "image" src = "img/등록(일반).png" onmouseover = "this.src = 'img/등록(오버).png';" onmouseout = "this.src = 'img/등록(일반).png';" onmousedown = "this.src = 'img/등록(클릭).png';" onmouseup = "this.src = 'img/등록(오버).png';"> </td> </table>
+<input type = "image" src = "img/add(default).png" onmouseover = "this.src = 'img/add(over).png';" onmouseout = "this.src = 'img/add(default).png';"> </td> </table>
 </form> </div>
 
-<div id = "Anni" style = "background-color : #ffc8c8; position : absolute; left : 400px; top : 300px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
+<div id = "Anni" style = "background-color : #ffffff; position : absolute; left : 400px; top : 300px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
 <table class = "normal" border = "1px">
 <form method = "get" action = "add_anni.php">
 <tr> <td> <div style = "width : 60px; text-align : center;"> 날짜<br>입력 </div> </td> <td style = "text-align : center;">
@@ -265,10 +277,10 @@ echo $string;
 
 <table style = "margin : 0 auto;"> <tr> <td>
 
-<img src = "img/취소(일반).png" onclick = "document.getElementById('Anni').style.visibility = 'hidden';" onmouseover = "this.src = 'img/취소(오버).png';" onmouseout = "this.src = 'img/취소(일반).png';" onmousedown = "this.src = 'img/취소(클릭).png';" onmouseup = "this.src = 'img/취소(오버).png';"> </td>
+<img src = "img/cancle(default).png" onclick = "document.getElementById('Anni').style.visibility = 'hidden';" onmouseover = "this.src = 'img/cancle(over).png';" onmouseout = "this.src = 'img/cancle(default).png';"> </td>
 
 <td> </td> <td>
-<input type = "image" src = "img/등록(일반).png" onmouseover = "this.src = 'img/등록(오버).png';" onmouseout = "this.src = 'img/등록(일반).png';" onmousedown = "this.src = 'img/등록(클릭).png';" onmouseup = "this.src = 'img/등록(오버).png';"> </td> </table>
+<input type = "image" src = "img/add(default).png" onmouseover = "this.src = 'img/add(over).png';" onmouseout = "this.src = 'img/add(default).png';"> </td> </table>
 </form> </div>
 
 

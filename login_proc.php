@@ -32,7 +32,7 @@
       else{
          session_start();
          $_SESSION['userid'] = $userid;
-            echo "<script> alert('로그인 성공!'); window.location.replace('Calendar.php?value=$date&Y=$Y&M=$M');</script>";
+            echo "<script> alert('로그인 성공!'); window.location.replace('main.php');</script>";
       }
   }
 

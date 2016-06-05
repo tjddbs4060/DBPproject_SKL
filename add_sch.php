@@ -1,6 +1,7 @@
 <?php
 //connect_today.php 로드
 include "connect_today.php";
+session_start();
 
 //내용이 있으면 실행 없으면 alert 출력
 if ($_GET['s_hour'] > $_GET['f_hour'] || ($_GET['s_minute'] > $_GET['f_minute'] && $_GET['s_hour'] == $_GET['f_hour'])) {
@@ -28,7 +29,7 @@ function add_content($date_now, $content) {
 	if ($f_hour < 10) $f_hour = "0".$f_hour;
 	if ($f_minute < 10) $f_minute = "0".$f_minute;
 
-	$query = "insert into schedule (id, friend_range, cheer_num, sch_date, sch_start_time, sch_finish_time, content) values ('qwer', ".$_GET['range'].", 0, $date_now[0]$date_now[1]$date_now[2], ".$s_hour.$s_minute."00, ".$f_hour.$f_minute."00, '$content')";
+	$query = "insert into schedule (id, friend_range, cheer_num, sch_date, sch_start_time, sch_finish_time, content) values ('".$_SESSION['userid']."', ".$_GET['range'].", 0, $date_now[0]$date_now[1]$date_now[2], ".$s_hour.$s_minute."00, ".$f_hour.$f_minute."00, '$content')";
 	mysql_query($query);
 
 	@mysql_close();

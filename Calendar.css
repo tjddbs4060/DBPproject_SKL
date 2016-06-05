@@ -2,3 +2,5 @@
 .normal {font-size : 15px; font-family : serif; font-weight : bold;}
 .sch {font-size : 20px; font-family : serif; font-weight : bold;}
 .tit {font-size : 40px; font-family : serif; font-weight : bold;}
+.day {font-size : 15px; font-family : serif; font-weight : bold; color : #5ac7db;}
+.main {margin : 0 auto; weight : 100%; background-color : #5ac7db; height : 40px; margin-bottom : 30px; padding : 20px 0px;}
