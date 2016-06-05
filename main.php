@@ -121,11 +121,9 @@
 
 				$string .= "<hr/>";
 				$string .= "<table><tr><td>";
-				$string .= "<textarea name='comment' cols='50' rows='5' style='position:relative'></textarea></td>";
-				$string .= "<input name='for_index' type='hidden' value='".$row['sch_index']."'>";
-				$string .= "<td style='width:110px;'><input type='image' id='".$num."' src='img/comment(insert).png' style='position:relative; bottom:2px; float:right;' onmouseover='this.src=\"img/comment(insert)(over).png\" '; onmouseout='this.src=\"img/comment(insert).png\" '; onmousedown='this.src=\"img/comment(insert)(click).png\"'; onmouseup='this.src=\"img/comment(insert)(over).png\" '>";
-				$string .= "</td></tr>";
-				$string .= "</table>";
+				$string .= "<input type = 'text' placeholder = '댓글을 입력해주세요.' name='comment' size = '65' style='position:relative'></td>";
+				$string .= "<input type='hidden' name = 'for_index' value='".$row['sch_index']."'>";
+				$string .= "</tr> </table>";
 				
 				$query_comment = "select com_index, id, com_date, content from comment where sch_index = ".$row['sch_index']." order by com_date desc";
 				$result_comment = mysql_query($query_comment);
@@ -153,7 +151,7 @@
 					$string .= "</td>";
 					$string .= "<td>";
 					if($row2['id']==$_SESSION['userid'])  {// testuser1을 세션 값으로 바꿔야함
-						$string .= "<img src= 'img/buttonX.png' width = '20px' height= '20px' onclick = 'location.href=\"http://localhost/deleteComment.php?index=".$row2['com_index']."\"'; onmouseover='this.src=\"img/buttonX(over).png\" '; onmouseout='this.src=\"img/buttonX.png\" '; onmousedown='this.src=\"img/buttonX(click).png\"'; onmouseup='this.src=\"img/buttonX(over).png\" '>";
+						$string .= "<img src= 'img/com_del(default).png' width = '20px' height= '20px' onclick = 'location.href=\"http://localhost/deleteComment.php?index=".$row2['com_index']."\"'; onmouseover='this.src=\"img/com_del(over).png\" '; onmouseout='this.src=\"img/com_del(default).png\"';>";
 					}
 					$string .= "</td>";
 					$string .= "</tr>";
