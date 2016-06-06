@@ -1,15 +1,14 @@
 ﻿<!DOCTYPE>
 <html>
 <head>
-	<style type = "text/css">
-	</style>
+<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 </head>
 <body>
-<table style = "width: 1100px; height: 800px; margin: 0 auto">
+<table class = "normal" style = "width: 1100px; height: 800px; margin: 0 auto">
 	<tr>
 		<td style = "width: 800px; height: 100px">
 		<div style = "text-align: center">
-		<img src = "loginimg/sns.png" height="120" width="200" alt="love">
+		<img src = "img/logo.png" height="120" width="200" alt="love">
 		</div>
 		</td>
 
@@ -45,10 +44,10 @@
 	</tr>
 	<tr>
 		<td>
-			<img src="loginimg/image1.png" id=image alt="YsjImage" style="width:650px; height:550px;">
+			<img src="img/im1.png" id=image alt="YsjImage" style="width:650px; height:550px;">
 			<script>
 			var myImage=document.getElementById("image");
-			var imageArray=["loginimg/image1.png","loginimg/image2.jpg","loginimg/image3.jpg","loginimg/image4.jpg"];  //이미지배열을 만들어 넣어준다.
+			var imageArray=["img/im1.png","img/im2.png","img/im3.png","img/im4.png"];  //이미지배열을 만들어 넣어준다.
 			var imageIndex=0;
 
 			function changeImage(){
