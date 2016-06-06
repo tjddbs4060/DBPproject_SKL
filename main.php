@@ -75,13 +75,14 @@
 			<img src = "img/home.png" width = "50px" height = "50px" onclick="window.location.reload();">
 			<img src = "img/friend_menu.png" width = "50px" height = "50px" onclick = "window.location.replace('friend_main.php')">
 			<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = <?php echo "\"window.location.replace('Calendar.php?value=$date&Y=$Y&M=$M');\""; ?> >
+			<img src = "img/Logout(default).png" width = "50px" height = "50px" onclick = "window.location.replace('logout.php')" onmouseover = "this.src = 'img/Logout(over).png';" onmouseout = "this.src = 'img/Logout(default).png';">
 	</div> </td> </tr> </table>
 		<?php
-			$query = "select distinct s.sch_index, s.id, s.sch_date, s.content, s.sch_start_time, s.sch_finish_time from friend as f, schedule as s where (f.id_friend = s.id and f.id = '".$_SESSION['userid']."' and s.friend_range > 0) or s.id = '".$_SESSION['userid']."' order by s.sch_modify_time desc";
+			$query = "select distinct s.sch_index, s.id, s.sch_date, s.content, s.sch_start_time, s.sch_finish_time from friend as f, schedule as s where (f.accept = 'TRUE' and f.id = '".$_SESSION['userid']."' and f.id_friend = s.id and s.friend_range > 0) or (f.accept = 'TRUE' and f.id_friend = '".$_SESSION['userid']."' and f.id = s.id and s.friend_range > 0) or s.id = '".$_SESSION['userid']."' order by s.sch_modify_time desc";
 			$result = mysql_query($query);
 			$num = 0;
 			while($row = mysql_fetch_assoc($result)){
-				$string = "<form method='get' action='commentInsert.php'>";
+				$string = "<form class = 'normal' method='get' action='commentInsert.php'>";
 				$string .="<fieldset style='background-color : #ffffff; width:500px; display: table; margin-left: auto; margin-right: auto;'>";
 				$string .="<legend>";
 				$string .="<table>";

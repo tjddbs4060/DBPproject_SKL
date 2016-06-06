@@ -20,6 +20,7 @@
 		<img src = "img/home.png" width = "50px" height = "50px" onclick = "window.location.replace('main.php');">
 		<img src = "img/friend_menu.png" width = "50px" height = "50px" onclick = "window.location.reload();">
 		<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = <?php echo "\"window.location.replace('Calendar.php?value=$date&Y=$Y&M=$M');\""; ?> >
+		<img src = "img/Logout(default).png" width = "50px" height = "50px" onclick = "window.location.replace('logout.php')" onmouseover = "this.src = 'img/Logout(over).png';" onmouseout = "this.src = 'img/Logout(default).png';">
 </div> </td> </tr> </table>
 
 <table style = "width : 400px; height : 50px; margin : 0 auto; background-image : URL('img/friend_accept.png'); background-repeat : no-repeat;">

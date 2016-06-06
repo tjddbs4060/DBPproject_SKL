@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	$connect = @mysql_connect('localhost', 'root', 'song');
 	$db_con = mysql_select_db("today", $connect);
 

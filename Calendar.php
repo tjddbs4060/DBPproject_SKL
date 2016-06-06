@@ -85,6 +85,7 @@ echo $string;
 		<img src = "img/home.png" width = "50px" height = "50px" onclick="location.href='http://localhost/main.php'">
 		<img src = "img/friend_menu.png" width = "50px" height = "50px" onclick = "window.location.replace('friend_main.php')">
 		<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = "window.location.reload();" >
+		<img src = "img/Logout(default).png" width = "50px" height = "50px" onclick = "window.location.replace('logout.php')" onmouseover = "this.src = 'img/Logout(over).png';" onmouseout = "this.src = 'img/Logout(default).png';">
 </div> </td> </tr> </table>
 
 <table style = "margin : 0 auto;"> <tr> <td valign = "top">
