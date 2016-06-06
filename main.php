@@ -110,7 +110,7 @@
 				$string .= "<img src = 'img/try(default).png' style='position:relative; bottom:-5px; margin-right:5px; float:right;'' onmouseover='this.src=\"img/try(over).png\" '; onmouseout='this.src=\"img/try(default).png\"';>";
 				$string .= "<img src = 'img/comment(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'commentView(".$row['sch_index'].");'; onmouseover='this.src=\"img/comment(over).png\" '; onmouseout='this.src=\"img/comment(default).png\"';>";
 
-				$query_cheer = "select sp.sup_index from schedule as s, support as sp where sp.sch_index = ".$row['sch_index']." and sp.id ='".$_SESSION['userid']."' and sp.flag = 'true'";
+				$query_cheer = "select sp.sup_index from schedule as s, support as sp where sp.sch_index = ".$row['sch_index']." and sp.id ='".$_SESSION['userid']."'";
 				$result_cheer = mysql_query($query_cheer);
 				if(mysql_num_rows($result_cheer)==0){
 					$string .= "<img id='".$num."' src = 'img/cheer(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'location.href=\"http://localhost/cheerClick.php?index=".$row['sch_index']."\"';  onmouseover='this.src=\"img/cheer(over).png\" '; onmouseout='this.src=\"img/cheer(default).png\"';>";

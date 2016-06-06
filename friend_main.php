@@ -43,6 +43,7 @@ $query = "select * from friend where (id = '".$_SESSION['userid']."' or id_frien
 $result = mysql_query($query);
 
 while ($list = mysql_fetch_assoc($result)) {
+	if (!strcmp($list['id'], $list['id_friend'])) continue;
 	if (!strcmp($list['id'], $_SESSION['userid'])) {
 		echo "<tr> <td>".$list['id_friend']."</td> <td style = 'text-align : right;'> <image src = 'img/del_friend(default).png' onclick = 'window.location.replace(\"del_friend.php?id=".$list['id']."&id_friend=".$list['id_friend']."\");' onmouseover = 'this.src = \"img/del_friend(over).png\";' onmouseout = 'this.src = \"img/del_friend(default).png\";'> </td> </tr>";
 	}

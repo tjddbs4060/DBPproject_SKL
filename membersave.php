@@ -1,5 +1,5 @@
 ﻿<?php
-	$connect = @mysql_connect('localhost', 'root', 'song');
+	$connect = @mysql_connect('localhost', 'root', '34862365');
 	$db_con = mysql_select_db("today", $connect);
 
 	$id=$_GET['newid'];
@@ -38,6 +38,7 @@
 
 	else if(isset($id) && isset($password)){
 			mysql_query($sql);
+			mysql_query("insert into friend (id, id_friend, accept) values ('$id', '$id', 'TRUE')");
 			echo "<script>alert('입력되었습니다.');window.location.replace('login.php');</script>";
 	}
 ?>
