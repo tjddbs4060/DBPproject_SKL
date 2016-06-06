@@ -22,11 +22,11 @@
 		<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = <?php echo "\"window.location.replace('Calendar.php?value=$date&Y=$Y&M=$M');\""; ?> >
 </div> </td> </tr> </table>
 
-<table style = "width : 400px; margin : 0 auto; background-image : URL('img/friend_list.png'); background-repeat : no-repeat;">
+<table style = "width : 400px; height : 50px; margin : 0 auto; background-image : URL('img/friend_accept.png'); background-repeat : no-repeat;">
 <tr style = "height : 46px; text-align : center;">
 <td width = "28px"> </td>
+<td onclick = "window.location.replace('friend_main.php');"> </td>
 <td onclick = "window.location.reload();"> </td>
-<td onclick = "window.location.replace('friend_accept.php');"> </td>
 <td onclick = "window.location.replace('friend_ask.php');"> </td>
 <td width = "28px"> </td>
 </tr>
@@ -37,18 +37,12 @@
 <table width = "350px" class = "normal">
 
 <?php
-//친구
-$query = "select * from friend where (id = '".$_SESSION['userid']."' or id_friend = '".$_SESSION['userid']."') and accept = 'TRUE'";
+//받은거
+$query = "select * from friend where id_friend = '".$_SESSION['userid']."' and accept = 'FALSE'";
 $result = mysql_query($query);
 
-while ($list = mysql_fetch_assoc($result)) {
-	if (!strcmp($list['id'], $_SESSION['userid'])) {
-		echo "<tr> <td>".$list['id_friend']."</td> <td style = 'text-align : right;'> <image src = 'img/del_friend(default).png' onclick = 'window.location.replace(\"del_friend.php?id=".$list['id']."&id_friend=".$list['id_friend']."\");' onmouseover = 'this.src = \"img/del_friend(over).png\";' onmouseout = 'this.src = \"img/del_friend(default).png\";'> </td> </tr>";
-	}
-	else {
-		echo "<tr> <td> ".$list['id']."</td> <td style = 'text-align : right;'> <image src = 'img/del_friend(default).png' onclick = 'window.location.replace(\"del_friend.php?id=".$list['id']."&id_friend=".$list['id_friend']."\");' onmouseover = 'this.src = \"img/del_friend(over).png\";' onmouseout = 'this.src = \"img/del_friend(default).png\";'> </td> </tr>";
-	}
-}
+while ($list = mysql_fetch_assoc($result))
+	echo "<tr> <td>".$list['id']."</td> <td style = 'text-align : right;'> <image src = 'img/accept_friend(default).png' onclick = 'window.location.replace(\"accept_friend.php?id=".$list['id']."&id_friend=".$list['id_friend']."\");' onmouseover = 'this.src = \"img/accept_friend(over).png\";' onmouseout = 'this.src = \"img/accept_friend(default).png\";'> </td> </tr>";
 
 ?>
 

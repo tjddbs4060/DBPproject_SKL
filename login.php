@@ -5,17 +5,17 @@
 	</style>
 </head>
 <body>
-<table border="1" style = "width: 1100px; height: 800px; margin: 0 auto">
+<table style = "width: 1100px; height: 800px; margin: 0 auto">
 	<tr>
 		<td style = "width: 800px; height: 100px">
 		<div style = "text-align: center">
-		<img src = "loginimg/love.jpg" height="80" width="150" alt="love">
+		<img src = "loginimg/sns.png" height="120" width="200" alt="love">
 		</div>
 		</td>
 
 		<td style = "width: 300px; height: 100px">
 		<form action="login_proc.php" method="GET">
-		<table border="1" style = "margin: 0 auto">
+		<table style = "margin: 0 auto">
 			<tr>
 				<td>
 					<P>아이디</P>
@@ -42,16 +42,29 @@
 		</table>
 		</form>
 		</td>
-
 	</tr>
-
 	<tr>
 		<td>
+			<img src="loginimg/image1.png" id=image alt="YsjImage" style="width:650px; height:550px;">
+			<script>
+			var myImage=document.getElementById("image");
+			var imageArray=["loginimg/image1.png","loginimg/image2.jpg","loginimg/image3.jpg","loginimg/image4.jpg"];  //이미지배열을 만들어 넣어준다.
+			var imageIndex=0;
+
+			function changeImage(){
+				myImage.setAttribute("src",imageArray[imageIndex]); //myImage의 src속성 값을 바꿔준다.
+				imageIndex++;
+				if(imageIndex>=imageArray.length){ //이미지index값이 길이보다 커지면 index값을 0으로 바꿔준다
+					imageIndex=0;
+				}
+			}
+			setInterval(changeImage,2000); //일정한 시간간격으로 돌린다.
+			</script>
 		</td>
 
 		<td>
-		<form name="join" method="GET" action="membersave.php">
-		<table border="1" style = "margin: 0 auto">
+		<form name="join" method="GET" action="membersave.php"> 
+		<table style = "margin: 0 auto">
 			<tr>
 				<td>
 					<input type="text" name="newid" placeholder = "아이디" style = "width: 150px; height: 40px"  pattern = ".{4,15}" title = "4~15자로 입력해주세요." >
@@ -63,13 +76,13 @@
 
 			<tr>
 				<td colspan=2>
-					<input type="text" name="mail" placeholder = "e-mail" style = "width: 300px; height: 40px">
+					<input type="text" name="mail" pattern = ".{1,15}@.{1,15}\..{1,5}" title = "e-mail 주소를 정확하게 넣어주세요." placeholder = "e-mail" style = "width: 300px; height: 40px">
 				</td>
 			</tr>
 
 			<tr>
 				<td colspan=2>
-					<input type="text" name="phonenum" placeholder = "000-0000-0000" style = "width: 300px; height: 40px">
+					<input type="text" name="phonenum" pattern = "[0-9]{3}-[0-9]{3,4}-[0-9]{4}" title = "번호를 정확하게 넣어주세요." placeholder = "000-0000-0000" style = "width: 300px; height: 40px ">
 				</td>
 			</tr>
 

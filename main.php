@@ -66,14 +66,14 @@
 		$M = date("m");
 	?>
 
-	<body onLoad="loadScroll()" onUnload="saveScroll()" style = "background-color : #f0f0f0; margin : 0 auto;">
+	<body class = "body" onLoad="loadScroll()" onUnload="saveScroll()">
 	<table width = "100%" class = "main"> <tr> <td>
 		<div style = "text-align : left; margin-left : 20px;">
 			<img src = "img/logo.png" width = "100px" height = "50px">
 		</div> </td>
 		<td align : right> <div style = "text-align : right; margin-right : 20px;">
 			<img src = "img/home.png" width = "50px" height = "50px" onclick="window.location.reload();">
-			<img src = "img/friend_menu.png" width = "50px" height = "50px">
+			<img src = "img/friend_menu.png" width = "50px" height = "50px" onclick = "window.location.replace('friend_main.php')">
 			<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = <?php echo "\"window.location.replace('Calendar.php?value=$date&Y=$Y&M=$M');\""; ?> >
 	</div> </td> </tr> </table>
 		<?php

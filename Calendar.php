@@ -83,7 +83,7 @@ echo $string;
 	</div> </td>
 	<td align : right> <div style = "text-align : right; margin-right : 20px;">
 		<img src = "img/home.png" width = "50px" height = "50px" onclick="location.href='http://localhost/main.php'">
-		<img src = "img/friend_menu.png" width = "50px" height = "50px">
+		<img src = "img/friend_menu.png" width = "50px" height = "50px" onclick = "window.location.replace('friend_main.php')">
 		<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = "window.location.reload();" >
 </div> </td> </tr> </table>
 
@@ -145,7 +145,7 @@ function display_list($date_now) {
 			if ($arr_list['id'] == null) $div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
 			else $div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['anni_year']."-".$arr_list['anni_mon']."-".$arr_list['anni_day']."<br> </font>".$arr_list['content']."</td> <td style = 'text-align : right; width : 30px;'>";
 
-			$div_string .= "<img src = 'img/delete(default).png' onclick = 'window.location.replace(\"del_anni.php?value=".$_GET['value']."&index=".$arr_list['anni_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/delete(over).png\";' onmouseout = 'this.src = \"img/delete(default).png\";'>";
+			if ($arr_list['id'] != null) $div_string .= "<img src = 'img/delete(default).png' onclick = 'window.location.replace(\"del_anni.php?value=".$_GET['value']."&index=".$arr_list['anni_index']."&Y=".$_GET['Y']."&M=".$_GET['M']."\");' onmouseover = 'this.src = \"img/delete(over).png\";' onmouseout = 'this.src = \"img/delete(default).png\";'>";
 			$div_string .= "</td> <tr style = 'height : 10px'> </tr> </tr>";
 			$i = 1;
 		}
