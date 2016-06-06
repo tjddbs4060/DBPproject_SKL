@@ -107,7 +107,8 @@
 				$string .= "<table>";
 				$string .= "<tr><td style='width:370px'></td>";
 				$string .= "<td>";
-				$string .= "<img src = 'img/try(default).png' style='position:relative; bottom:-5px; margin-right:5px; float:right;'' onmouseover='this.src=\"img/try(over).png\" '; onmouseout='this.src=\"img/try(default).png\"';>";
+				if($_SESSION['userid'] != $row['id'])
+					$string .= "<img src = 'img/try(default).png' style='position:relative; bottom:-5px; margin-right:5px; float:right;'' onmouseover='this.src=\"img/try(over).png\" '; onmouseout='this.src=\"img/try(default).png\"';>";
 				$string .= "<img src = 'img/comment(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'commentView(".$row['sch_index'].");'; onmouseover='this.src=\"img/comment(over).png\" '; onmouseout='this.src=\"img/comment(default).png\"';>";
 
 				$query_cheer = "select sp.sup_index from schedule as s, support as sp where sp.sch_index = ".$row['sch_index']." and sp.id ='".$_SESSION['userid']."'";

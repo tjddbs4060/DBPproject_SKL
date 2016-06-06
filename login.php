@@ -1,11 +1,7 @@
 ﻿<!DOCTYPE>
 <html>
 <head>
-   <style type = "text/css">
-      #edge {border-top-left-radius:8px; border-top-right-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius: 8px;}
-      #image {border-top-left-radius:15px; border-top-right-radius:15px; border-bottom-left-radius:15px; border-bottom-right-radius: 15px;}
-      #main {margin : 0 auto; weight : 100%; background-color : #5ac7db; height : 40px; margin-bottom : 30px; padding : 20px 0px;}
-   </style>
+<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 </head>
 <body style = "background-color : #f0f0f0;">
 <table style = "width: 1100px; height: 800px; margin: 0 auto">
@@ -21,7 +17,7 @@
       <table cellspacing="10" style = "margin: 0 auto">
          <tr>
             <td>
-               <P style = "font-size:20;">아이디</P>
+               <p style = "font-size:20;">아이디</p>
             </td>
             <td>
                <input type = 'text' id='edge' name='username' pattern = ".{4,15}" title = "4~15자로 입력해주세요." style = "width: 180px; height: 40px" />
@@ -79,19 +75,21 @@
          </tr>
 
          <tr>
-            <td colspan=2>
+            <td colspan="2">
                <input type="text" id='edge' name="mail" pattern = ".{1,15}@.{1,15}\..{1,5}" title = "e-mail 주소를 정확하게 넣어주세요." placeholder = "e-mail" style = "width: 320px; height: 40px;  font-size:18;">
             </td>
          </tr>
 
          <tr>
-            <td colspan=2>
+            <td colspan="2">
                <input type="text" id='edge' name="phonenum" pattern = "[0-9]{3}-[0-9]{3,4}-[0-9]{4}" title = "번호를 정확하게 넣어주세요." placeholder = "000-0000-0000" style = "width: 320px; height: 40px; font-size:18;">
             </td>
          </tr>
 
          <tr>
-            <td colspan=2>
+            <td colspan="2">
+               <font class = "sch"> 생일 </font>
+
                <script language = "javascript">
                var sel1, sel2, sel3;
                var today = new Date();
@@ -114,15 +112,14 @@
                sel3.add(new Option(1+i+"일", 1+i), i);
                }
                </script>
-
-               <select name="year" id="years" style = "width: 80px; height: 40px"> </select>
-               <select name="month" id="months" style = "width: 80px; height: 40px"> </select>
-               <select name="day" id="days" style = "width: 80px; height: 40px"> </select>
+               <select name="year" id="button2" style = "width: 80px; height: 40px; font-size:14;"> </select>
+               <select name="month" id="button2" style = "width: 80px; height: 40px; font-size:14;"> </select>
+               <select name="day" id="button2" style = "width: 80px; height: 40px; font-size:14;"> </select>
             </td>
          </tr>
 
          <tr>
-            <td colspan=2>
+            <td colspan="2">
                <input type=submit value="가입하기" style = "width: 100px; height: 40px; background-color:#BEDFE1;">
             </td>
          </tr>
