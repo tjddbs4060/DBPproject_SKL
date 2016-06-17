@@ -81,7 +81,7 @@
 			<img src = "img/Logout(default).png" width = "50px" height = "50px" onclick = "window.location.replace('logout.php')" onmouseover = "this.src = 'img/Logout(over).png';" onmouseout = "this.src = 'img/Logout(default).png';">
 	</div> </td> </tr> </table>
 		<?php
-			$query = "select distinct s.sch_index, s.id, s.sch_date, s.content, s.sch_start_time, s.sch_finish_time, s.friend_range from friend as f, schedule as s where (f.accept = 'TRUE' and f.id = '".$_SESSION['userid']."' and f.id_friend = s.id and s.friend_range > 0) or (f.accept = 'TRUE' and f.id_friend = '".$_SESSION['userid']."' and f.id = s.id and s.friend_range > 0) or s.id = '".$_SESSION['userid']."' order by s.sch_modify_time desc";
+			$query = "select distinct s.sch_index, s.id, s.sch_date, s.content, s.sch_start_time, s.sch_finish_time, s.friend_range from friend as f, schedule as s where (f.accept = 'TRUE' and f.id = '".$_SESSION['userid']."' and f.id_friend = s.id and s.friend_range > 0) or (f.accept = 'TRUE' and f.id_friend = '".$_SESSION['userid']."' and f.id = s.id and s.friend_range > 0) or s.id = '".$_SESSION['userid']."' or s.friend_range = 2 order by s.sch_modify_time desc";
 			$result = mysql_query($query);
 			$num = 0;
 			while($row = mysql_fetch_assoc($result)){
