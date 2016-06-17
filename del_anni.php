@@ -1,21 +1,21 @@
-ï»¿<?php
-//connect_today.php ë¡œë“œ
+<?php
+//connect_today.php ·Îµå
 include "connect_today.php";
 
 if ($_GET['index']) del_anni();
 else {
 	@mysql_close();
-	echo "<script> alert('ê¸°ë…ì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('±â³äÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 function del_anni() {
-//í•´ë‹¹ ì¸ë±ìŠ¤ ê¸°ë…ì¼ ì‚­ì œ
-	$query = "delete from anniversary where anni_index = ".$_GET['index'];	//id ì¶”ê°€í• ê±°
+//ÇØ´ç ÀÎµ¦½º ±â³äÀÏ »èÁ¦
+	$query = "delete from anniversary where anni_index = ".$_GET['index'];	//id Ãß°¡ÇÒ°Å
 	mysql_query($query);
 
 	@mysql_close();
 
-	echo "<script> alert('ê¸°ë…ì¼ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('±â³äÀÏÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 ?>

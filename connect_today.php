@@ -1,5 +1,5 @@
-ï»¿<?php 
-//ë°ì´í„°ë² ì´ìŠ¤ì— ì—°ê²°
+<?php 
+//µ¥ÀÌÅÍº£ÀÌ½º¿¡ ¿¬°á
 	$connect = @mysql_connect('localhost', 'root', '34862365');
 	$db_con = @mysql_select_db("today", $connect) or die("Fail");
 ?>

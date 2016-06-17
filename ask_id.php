@@ -1,16 +1,16 @@
-ï»¿<?php
+<?php
 
 include "connect_today.php";
 
 session_start();
 
-if (!$_GET['friend']) echo "<script> alert('ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.'); window.location.replace('friend_ask.php'); </script>";
+if (!$_GET['friend']) echo "<script> alert('¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.'); window.location.replace('friend_ask.php'); </script>";
 
 $query = "select u.id from user as u, friend as f where u.id = '".$_GET['friend']."' and ((f.id = u.id and f.id_friend = '".$_SESSION['userid']."') or (f.id = '".$_SESSION['userid']."' and f.id_friend = u.id))";
 $result = mysql_query($query);
 
 if ($ask = mysql_fetch_assoc($result))
-	echo "<script> alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””ì´ê±°ë‚˜ ì¹œêµ¬ ìš”ì²­ ë° ì‹ ì²­ëœ ì¹œêµ¬ì…ë‹ˆë‹¤.'); window.location.replace('friend_ask.php'); </script>";
+	echo "<script> alert('Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğÀÌ°Å³ª Ä£±¸ ¿äÃ» ¹× ½ÅÃ»µÈ Ä£±¸ÀÔ´Ï´Ù.'); window.location.replace('friend_ask.php'); </script>";
 else {
 	$query = "select id from user where id = '".$_GET['friend']."'";
 	$result = mysql_query($query);
@@ -18,9 +18,9 @@ else {
 		mysql_query("insert into friend (id, id_friend, accept) values ('".$_SESSION['userid']."', '".$_GET['friend']."', 'FALSE')");
 
 		@mysql_close();
-		echo "<script> alert('ì¹œêµ¬ ì‹ ì²­ë˜ì—‡ìŠµë‹ˆë‹¤.'); window.location.replace('friend_ask.php'); </script>";
+		echo "<script> alert('Ä£±¸ ½ÅÃ»µÇ¾ù½À´Ï´Ù.'); window.location.replace('friend_ask.php'); </script>";
 	}
-	else echo "<script> alert('ì˜ëª»ëœ ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤.'); window.location.replace('friend_ask.php'); </script>";
+	else echo "<script> alert('Àß¸øµÈ ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¿´½À´Ï´Ù.'); window.location.replace('friend_ask.php'); </script>";
 }
 
 ?>

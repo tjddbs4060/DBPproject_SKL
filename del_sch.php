@@ -1,22 +1,22 @@
-ï»¿<?php
-//connect_today.php ë¡œë“œ
+<?php
+//connect_today.php ·Îµå
 include "connect_today.php";
 
-//ì¼ì •ì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´ ì‹¤í–‰í•˜ì§€ ì•Šê³  ì„ íƒí•˜ë©´ ì‹¤í–‰
+//ÀÏÁ¤À» ¼±ÅÃÇÏÁö ¾ÊÀ¸¸é ½ÇÇàÇÏÁö ¾Ê°í ¼±ÅÃÇÏ¸é ½ÇÇà
 if ($_GET['index']) del_sch();
 else {
 	@mysql_close();
-	echo "<script> alert('ì¼ì •ì„ ì„ íƒí•´ì£¼ì„¸ìš”.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('ÀÏÁ¤À» ¼±ÅÃÇØÁÖ¼¼¿ä.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 function del_sch() {
-//ë°›ì•„ì˜¨ ê°’ì´ ì¼ì •ì´ë©´ ì‚´ì œ ì‹¤í–‰
-	$query = "delete from schedule where sch_index = '".$_GET['index']."'";	//id ì¶”ê°€í• ê±°
+//¹Ş¾Æ¿Â °ªÀÌ ÀÏÁ¤ÀÌ¸é »ìÁ¦ ½ÇÇà
+	$query = "delete from schedule where sch_index = '".$_GET['index']."'";	//id Ãß°¡ÇÒ°Å
 	mysql_query($query);
 
 	@mysql_close();
 
-	echo "<script> alert('ì¼ì •ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('ÀÏÁ¤ÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 ?>

@@ -15,6 +15,7 @@
 		$date = date("Y-m-d");
 		$Y = date("Y");
 		$M = date("m");
+		if ($M < 10) $M = substr($M, 1, 1);
 	?>
 
 	<body class = "body">

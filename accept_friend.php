@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 
 include "connect_today.php";
 
@@ -7,6 +7,6 @@ mysql_query($query);
 
 @mysql_close();
 
-echo "<script> alert('ì¹œêµ¬ê°€ ë˜ì—‡ìŠµë‹ˆë‹¤.'); window.location.replace('friend_accept.php'); </script>";
+echo "<script> alert('Ä£±¸°¡ µÇ¾ù½À´Ï´Ù.'); window.location.replace('friend_accept.php'); </script>";
 
 ?>

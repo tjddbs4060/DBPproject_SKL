@@ -1,10 +1,10 @@
-ï»¿<?php require("connect_today.php"); session_start(); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>ê¸°ë³¸í™”ë©´</title>
+		<title>±âº»È­¸é</title>
 		<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 		<script type="text/javascript">
 			var db = (document.body) ? 1 : 0
@@ -65,6 +65,7 @@
 		$date = date("Y-m-d");
 		$Y = date("Y");
 		$M = date("m");
+		if ($M < 10) $M = substr($M, 1, 1);
 	?>
 
 	<body class = "body" onLoad="loadScroll()" onUnload="saveScroll()">
@@ -105,7 +106,7 @@
 				else $string .= $row['sch_start_time'] . " ~ " . $row['sch_finish_time'];
 				$string .= "</td>";
 				$string .= "<td>". $row['content'] ."</td></tr></table></div><br/>";
-				if($row['friend_range'] != 0) {		// ë‚˜ë§Œë³´ê¸° ë²”ìœ„ì˜ ê¸€ì€ ì‘ì›í•˜ê¸°ì™€ í•¨ê»˜í•˜ëŠ” ì‚¬ëŒ ì •ë³´ê°€ í‘œì‹œë˜ì§€ ì•ŠìŒ
+				if($row['friend_range'] != 0) {		// ³ª¸¸º¸±â ¹üÀ§ÀÇ ±ÛÀº ÀÀ¿øÇÏ±â¿Í ÇÔ²²ÇÏ´Â »ç¶÷ Á¤º¸°¡ Ç¥½ÃµÇÁö ¾ÊÀ½
 					$string .= "<table>";
 					$string .= "<tr><td style='width:370px'>";
 	
@@ -113,7 +114,7 @@
 					$result_cheertable = mysql_query($query_cheertable);
 					$cheer_num = mysql_num_rows($result_cheertable);
 					if($cheer_num != 0) {
-						$string .= "<a href='cheer_people.php?index=".$row['sch_index']."'>ì‘ì›ìˆ˜ : ";
+						$string .= "<a href='cheer_people.php?index=".$row['sch_index']."'>ÀÀ¿ø¼ö : ";
 						$string .= $cheer_num;
 						$string .= "</a>";
 					}
@@ -122,8 +123,8 @@
 					$result_trytable = mysql_query($query_trytable);
 					$try_num = mysql_num_rows($result_trytable);
 					if($try_num != 0) {
-						$string .= "<br/><a href='try_people.php?index=".$row['sch_index']."'>í•¨ê»˜í•˜ëŠ” ì‚¬ëŒ : ";
-						$string .= $try_num."ëª…</a>";
+						$string .= "<br/><a href='try_people.php?index=".$row['sch_index']."'>ÇÔ²²ÇÏ´Â »ç¶÷ : ";
+						$string .= $try_num."¸í</a>";
 					}
 					$string .= "</td>";
 
@@ -153,7 +154,7 @@
 
 					$string .= "<hr/>";
 					$string .= "<table><tr><td>";
-					$string .= "<input type = 'text' placeholder = 'ëŒ“ê¸€ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.' name='comment' size = '65' style='position:relative'></td>";
+					$string .= "<input type = 'text' placeholder = '´ñ±ÛÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.' name='comment' size = '65' style='position:relative'></td>";
 					$string .= "<input type='hidden' name = 'for_index' value='".$row['sch_index']."'>";
 					$string .= "</tr> </table>";
 				}
@@ -182,7 +183,7 @@
 					$string .= "".$row2['content']."";
 					$string .= "</td>";
 					$string .= "<td>";
-					if($row2['id']==$_SESSION['userid'])  {// testuser1ì„ ì„¸ì…˜ ê°’ìœ¼ë¡œ ë°”ê¿”ì•¼í•¨
+					if($row2['id']==$_SESSION['userid'])  {// testuser1À» ¼¼¼Ç °ªÀ¸·Î ¹Ù²ã¾ßÇÔ
 						$string .= "<img src= 'img/com_del(default).png' width = '20px' height= '20px' onclick = 'location.href=\"deleteComment.php?index=".$row2['com_index']."\"'; onmouseover='this.src=\"img/com_del(over).png\" '; onmouseout='this.src=\"img/com_del(default).png\"';>";
 					}
 					$string .= "</td>";

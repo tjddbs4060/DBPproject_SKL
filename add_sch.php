@@ -1,22 +1,22 @@
-ï»¿<?php
-//connect_today.php ë¡œë“œ
+<?php
+//connect_today.php ·Îµå
 include "connect_today.php";
 session_start();
 
-//ë‚´ìš©ì´ ìˆìœ¼ë©´ ì‹¤í–‰ ì—†ìœ¼ë©´ alert ì¶œë ¥
+//³»¿ëÀÌ ÀÖÀ¸¸é ½ÇÇà ¾øÀ¸¸é alert Ãâ·Â
 if ($_GET['s_hour'] > $_GET['f_hour'] || ($_GET['s_minute'] > $_GET['f_minute'] && $_GET['s_hour'] == $_GET['f_hour'])) {
 	@mysql_close();
-	echo "<script> alert('ì‹œì‘ì‹œê°„ì´ ì¢…ë£Œì‹œê°„ë³´ë‹¤ ê¹ë‹ˆë‹¤.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('½ÃÀÛ½Ã°£ÀÌ Á¾·á½Ã°£º¸´Ù ±é´Ï´Ù.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 else if ($_GET['content']) add_content($_GET['value'], $_GET['content']);
 else {
 	@mysql_close();
-	echo "<script> alert('ì¼ì •ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('ÀÏÁ¤À» ÀÔ·ÂÇØÁÖ¼¼¿ä.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 function add_content($date_now, $content) {
 
-//ë°›ì•„ì˜¨ ë‚ ì§œ ë¶„í•  í›„, ì›”ê³¼ ì¼ì´ í•œìë¦¬ì´ë©´ ë‘ìë¦¬ë¡œ ëŠ˜ë ¤ì¤Œ
+//¹Ş¾Æ¿Â ³¯Â¥ ºĞÇÒ ÈÄ, ¿ù°ú ÀÏÀÌ ÇÑÀÚ¸®ÀÌ¸é µÎÀÚ¸®·Î ´Ã·ÁÁÜ
 	$date_now = explode("-", $date_now);
 	$s_hour = (int)$_GET['s_hour'];
 	$s_minute = (int)$_GET['s_minute'];
@@ -34,7 +34,7 @@ function add_content($date_now, $content) {
 
 	@mysql_close();
 
-//ì¿¼ë¦¬ì— ì¼ì • ì¶”ê°€ í›„ alert ì¶œë ¥
-	echo "<script> alert('ì¼ì •ì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+//Äõ¸®¿¡ ÀÏÁ¤ Ãß°¡ ÈÄ alert Ãâ·Â
+	echo "<script> alert('ÀÏÁ¤ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 ?>

@@ -1,8 +1,8 @@
-ï»¿<?php require("connect_today.php"); session_start(); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE>
 <html>
-<head> <meta charset="utf-8"> <title> ì¹œêµ¬ì°½ </title> </head>
+<head> <meta charset="utf-8"> <title> Ä£±¸Ã¢ </title> </head>
 <body class = "body">
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 
@@ -10,6 +10,7 @@
 	$date = date("Y-m-d");
 	$Y = date("Y");
 	$M = date("m");
+	if ($M < 10) $M = substr($M, 1, 1);
 ?>
 
 <table width = "100%" class = "main"> <tr> <td>
@@ -37,14 +38,14 @@
 
 <form method = "GET" action = "ask_id.php">
 
-<input type = "text" placeholder = "ì¹œêµ¬ ì‹ ì²­ í•  ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”." name = "friend" size = "40">
+<input type = "text" placeholder = "Ä£±¸ ½ÅÃ» ÇÒ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä." name = "friend" size = "40">
 
 </form>
 
 <table width = "350px" class = "normal">
 
 <?php
-//ì¹œêµ¬ ì‹ ì²­
+//Ä£±¸ ½ÅÃ»
 $query = "select * from friend where id = '".$_SESSION['userid']."' and accept = 'FALSE'";
 $result = mysql_query($query);
 

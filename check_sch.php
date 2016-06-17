@@ -1,10 +1,10 @@
-ï»¿<?php require("connect_today.php"); session_start(); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title> ì¼ì • í™•ì¸ </title>
+		<title> ÀÏÁ¤ È®ÀÎ </title>
 		<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 		<script type="text/javascript">
 
@@ -15,6 +15,7 @@
 		$date = date("Y-m-d");
 		$Y = date("Y");
 		$M = date("m");
+		if ($M < 10) $M = substr($M, 1, 1);
 	?>
 
 	<body class = "body">
@@ -44,7 +45,7 @@
 				$string .="'".$row['id']."'";
 				$string .="</td>";
 				$string .="<td>";
-				$string .="ì˜ ì¼ì • í™•ì¸";
+				$string .="ÀÇ ÀÏÁ¤ È®ÀÎ";
 				$string .= "</td></tr></table></legend>";
 				$string .= "<div>";
 				$string .= "&lt;" . $row['sch_date'] . "&gt";
@@ -63,8 +64,8 @@
 				$result = mysql_query($query);
 				$num = mysql_num_rows($result);
 				$string .= "<font color = '#0000ff'>";
-				if (!$num) $string .= "ì‘ì›í•œ ì‚¬ëŒì´ ì—†ì–´ìš”..";
-				else $string .= "ì‘ì›í•œ ì‚¬ëŒ! <br>";
+				if (!$num) $string .= "ÀÀ¿øÇÑ »ç¶÷ÀÌ ¾ø¾î¿ä..";
+				else $string .= "ÀÀ¿øÇÑ »ç¶÷! <br>";
 				$string .= "</font>";
 				while ($arr_list = mysql_fetch_assoc($result)) {
 					$string .= $arr_list['id']."<br>";
@@ -75,8 +76,8 @@
 				$result = mysql_query($query);
 				$num = mysql_num_rows($result);
 				$string .= "<font color = '#0000ff'>";
-				if (!$num) $string .= "ê°™ì´í•˜ëŠ” ì‚¬ëŒì´ ì—†ì–´ìš”..";
-				else $string .= "ê°™ì´í•˜ëŠ” ì‚¬ëŒ! <br>";
+				if (!$num) $string .= "°°ÀÌÇÏ´Â »ç¶÷ÀÌ ¾ø¾î¿ä..";
+				else $string .= "°°ÀÌÇÏ´Â »ç¶÷! <br>";
 				$string .= "</font>";
 				while ($arr_list = mysql_fetch_assoc($result)) {
 					$string .= $arr_list['id']."<br>";
@@ -87,8 +88,8 @@
 				$result = mysql_query($query);
 				$num = mysql_num_rows($result);
 				$string .= "<font color = '#0000ff'>";
-				if (!$num) $string .= "ëŒ“ê¸€ ì“´ ì‚¬ëŒì´ ì—†ì–´ìš”.. </td> </tr>";
-				else $string .= "ëŒ“ê¸€ ì“´ ì‚¬ëŒ! <br> </tr>";
+				if (!$num) $string .= "´ñ±Û ¾´ »ç¶÷ÀÌ ¾ø¾î¿ä.. </td> </tr>";
+				else $string .= "´ñ±Û ¾´ »ç¶÷! <br> </tr>";
 				$string .= "</font>";
 				while ($arr_list = mysql_fetch_assoc($result)) {
 					$string .= "<tr> <td colspan = '2' style = 'text-align : center;'>".$arr_list['id']." | ".$arr_list['com_date']."<br>".$arr_list['content']."</p> </tr>";

@@ -1,8 +1,8 @@
-﻿<?php require("connect_today.php"); session_start(); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE>
 <html>
-<head> <meta charset="utf-8"> <title> 친구창 </title> </head>
+<head> <meta charset="utf-8"> <title> ģ��â </title> </head>
 <body class = "body">
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 
@@ -10,6 +10,7 @@
 	$date = date("Y-m-d");
 	$Y = date("Y");
 	$M = date("m");
+	if ($M < 10) $M = substr($M, 1, 1);
 ?>
 
 <table width = "100%" class = "main"> <tr> <td>
@@ -38,7 +39,7 @@
 <table width = "350px" class = "normal">
 
 <?php
-//친구
+//ģ��
 $query = "select * from friend where (id = '".$_SESSION['userid']."' or id_friend = '".$_SESSION['userid']."') and accept = 'TRUE'";
 $result = mysql_query($query);
 

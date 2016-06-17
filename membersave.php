@@ -37,6 +37,7 @@
 
 	else if(isset($id) && isset($password)){
 			mysql_query($sql);
+			mysql_query("insert into friend (id, id_friend, accept) values ('$id', '$id', 'TRUE')");
 			mysql_query("insert into anniversary (anni_year, anni_mon, anni_day, content, id) values (".$_GET['year'].", ".$_GET['month'].", ".$_GET['day'].", 'birthday ~ ', '$id')");
 			echo "<script>alert('축하합니다!');window.location.replace('login.php');</script>";
 	}

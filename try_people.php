@@ -1,10 +1,10 @@
-ï»¿<?php require("connect_today.php"); session_start(); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>í•¨ê»˜í•˜ê¸°</title>
+		<title>ÇÔ²²ÇÏ±â</title>
 		<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 		<script type="text/javascript">
 
@@ -15,6 +15,7 @@
 		$date = date("Y-m-d");
 		$Y = date("Y");
 		$M = date("m");
+		if ($M < 10) $M = substr($M, 1, 1);
 	?>
 
 	<body class = "body">
@@ -39,7 +40,7 @@
 				$string .="<table>";
 				$string .="<tr>";
 				$string .="<td>";
-				$string .="<ì´ ì¼ì •ê³¼ í•¨ê»˜í•˜ëŠ” ì‚¬ëžŒ>";
+				$string .="<ÀÌ ÀÏÁ¤°ú ÇÔ²²ÇÏ´Â »ç¶÷>";
 				$string .= "</td></tr></table></legend>";
 				
 				while($row_people = mysql_fetch_assoc($result_try_people)){

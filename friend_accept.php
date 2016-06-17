@@ -1,8 +1,8 @@
-ï»¿<?php require("connect_today.php"); session_start(); ?>
+<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE>
 <html>
-<head> <meta charset="utf-8"> <title> ì¹œêµ¬ì°½ </title> </head>
+<head> <meta charset="utf-8"> <title> Ä£±¸Ã¢ </title> </head>
 <body class = "body">
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 
@@ -10,6 +10,7 @@
 	$date = date("Y-m-d");
 	$Y = date("Y");
 	$M = date("m");
+	if ($M < 10) $M = substr($M, 1, 1);
 ?>
 
 <table width = "100%" class = "main"> <tr> <td>
@@ -38,7 +39,7 @@
 <table width = "350px" class = "normal">
 
 <?php
-//ë°›ì€ê±°
+//¹ÞÀº°Å
 $query = "select * from friend where id_friend = '".$_SESSION['userid']."' and accept = 'FALSE'";
 $result = mysql_query($query);
 

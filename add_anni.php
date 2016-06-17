@@ -1,13 +1,13 @@
-ï»¿<?php
-//connect_today.php ë¡œë“œ
+<?php
+//connect_today.php ·Îµå
 include "connect_today.php";
 session_start();
 
-//ë‚´ìš©ì„ ì…ë ¥í•˜ë©´ ì‹¤í–‰, ì…ë ¥í•˜ì§€ ì•Šìœ¼ë©´ alert ì¶œë ¥
+//³»¿ëÀ» ÀÔ·ÂÇÏ¸é ½ÇÇà, ÀÔ·ÂÇÏÁö ¾ÊÀ¸¸é alert Ãâ·Â
 if ($_GET['content']) add_anni($_GET['value'], $_GET['content']);
 else {
 	@mysql_close();
-	echo "<script> alert('ê¸°ë…ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+	echo "<script> alert('±â³äÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 
 function add_anni($date_now, $content) {
@@ -16,7 +16,7 @@ function add_anni($date_now, $content) {
 
 	@mysql_close();
 
-//ì¿¼ë¦¬ë¬¸ì— ì €ì¥ í›„ alert ì¶œë ¥
-	echo "<script> alert('ê¸°ë…ì¼ì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
+//Äõ¸®¹®¿¡ ÀúÀå ÈÄ alert Ãâ·Â
+	echo "<script> alert('±â³äÀÏÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.'); window.location.replace('Calendar.php?value=".$_GET['value']."&Y=".$_GET['Y']."&M=".$_GET['M']."');</script>";
 }
 ?>
