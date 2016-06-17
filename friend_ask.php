@@ -7,11 +7,11 @@
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 
 <?php
-	$date = date("Y-m-d");
 	$Y = date("Y");
 	if ($Y < 10) $M = substr($Y, 1, 1);
 	$M = date("m");
 	if ($M < 10) $M = substr($M, 1, 1);
+	$date = $Y."-".$M."-".date("d");
 ?>
 
 <table width = "100%" class = "main"> <tr> <td>
