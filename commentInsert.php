@@ -14,6 +14,6 @@
 	}
 	
 	@mysql_close();
-	$url = "http://localhost/main.php'";
+	$url = "main.php'";
 	echo "<meta http-equiv='Refresh' content='0; URL=$url>"; 
 ?>

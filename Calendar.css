@@ -1,4 +1,4 @@
-.small {font-size : 10px; font-family : serif; font-weight : bold;}
+﻿.small {font-size : 10px; font-family : serif; font-weight : bold;}
 .normal {font-size : 15px; font-family : serif; font-weight : bold;}
 .sch {font-size : 20px; font-family : serif; font-weight : bold;}
 .tit {font-size : 40px; font-family : serif; font-weight : bold;}
@@ -8,3 +8,6 @@
 #edge {border-top-left-radius:8px; border-top-right-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius: 8px;}
 #image {border-top-left-radius:15px; border-top-right-radius:15px; border-bottom-left-radius:15px; border-bottom-right-radius: 15px;}
 #main {margin : 0 auto; weight : 100%; background-color : #5ac7db; height : 40px; margin-bottom : 30px; padding : 20px 0px;}
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}

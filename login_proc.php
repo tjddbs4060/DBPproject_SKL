@@ -1,6 +1,5 @@
 ﻿<?php
-	$connect = @mysql_connect('localhost', 'root', '34862365');
-	$db_con = mysql_select_db("today", $connect);
+	require("connect_today.php");
 
 	$userid = $_GET['username'];
 	$userpw = $_GET['password'];

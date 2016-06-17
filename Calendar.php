@@ -1,21 +1,21 @@
-<?php require("connect_today.php"); session_start(); ?>
+ï»¿<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE>
 <html>
-<head> <title> ÀÏÁ¤ °ü¸® ÆäÀÌÁö </title> </head>
+<head> <meta charset="utf-8"> <title> ì¼ì • ê´€ë¦¬ í˜ì´ì§€ </title> </head>
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 <body style = "background-color : #f0f0f0; margin : 0 auto;">
 
 <script type = "text/javascript" src = "Calendar.js"> </script>
 
 <?php
-//php¹®À¸·Î html¿¡ ÀÚ¹Ù½ºÅ©¸³Æ®¸¦ Ãâ·ÂÇÏ¿© ÀÚ¹Ù½ºÅ©¸³Æ®Ã³·³ »ç¿ë
+//phpë¬¸ìœ¼ë¡œ htmlì— ìë°”ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì¶œë ¥í•˜ì—¬ ìë°”ìŠ¤í¬ë¦½íŠ¸ì²˜ëŸ¼ ì‚¬ìš©
 $string = '<script type = "text/javascript">';
 
-//ÆäÀÌÁö°¡ ¶ß¸é ÀÚµ¿À¸·Î ½ÇÇàµÇ´Â ÇÔ¼ö
+//í˜ì´ì§€ê°€ ëœ¨ë©´ ìë™ìœ¼ë¡œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
 $string .= 'window.onload = function() {';
 
-//¹Ş¾Æ¿Â °ªÀ» Calendar.js ÆÄÀÏ¿¡ ÀÖ´Â Àü¿ªº¯¼ö¿¡ ÀúÀå
+//ë°›ì•„ì˜¨ ê°’ì„ Calendar.js íŒŒì¼ì— ìˆëŠ” ì „ì—­ë³€ìˆ˜ì— ì €ì¥
 $string .= "ymd = '".$_GET['value']."';";
 $string .= "y_now = ".$_GET['Y'].";";
 $string .= "m_now = ".$_GET['M'].";";
@@ -26,22 +26,22 @@ $string .= '</script>';
 
 echo $string;
 
-//ÇØ´çÇÏ´Â id(¾ÆÁ÷ ¾ÈÇÔ)¿Í ¾ø´Â idÀÇ ¸ğµç ±â³äÀÏÀÇ Á¤º¸ ÀúÀå
+//í•´ë‹¹í•˜ëŠ” id(ì•„ì§ ì•ˆí•¨)ì™€ ì—†ëŠ” idì˜ ëª¨ë“  ê¸°ë…ì¼ì˜ ì •ë³´ ì €ì¥
 $query = "select * from anniversary where id is null or id = '".$_SESSION['userid']."' order by anni_mon, anni_day";
 $result = mysql_query($query);
 
 $string = "<script type = 'text/javascript'>";
 $string .= "function anni_col() {";
 
-//ÀúÀåÇÑ Á¤º¸¸¦ anni¶ó´Â º¯¼ö¿¡ ¹è¿­·Î ÀúÀå
+//ì €ì¥í•œ ì •ë³´ë¥¼ annië¼ëŠ” ë³€ìˆ˜ì— ë°°ì—´ë¡œ ì €ì¥
 $string .= "var anni = new Array(";
 
-//ÀúÀåÇÑ ±â³äÀÏÀÇ Á¤º¸¸¦ ÇÑÁÙ¾¿ Ãâ·ÂÇÏ¿© ¹è¿­¿¡ ¼ø¼­´ë·Î ÀúÀå
+//ì €ì¥í•œ ê¸°ë…ì¼ì˜ ì •ë³´ë¥¼ í•œì¤„ì”© ì¶œë ¥í•˜ì—¬ ë°°ì—´ì— ìˆœì„œëŒ€ë¡œ ì €ì¥
 while ($list = mysql_fetch_assoc($result))
 	$string .= $list['anni_mon'].", ".$list['anni_day'].",'".$list['content']."',";
 
 
-//¹è¿­ÀÇ ¸¶Áö¸·ÀÇ ,(ÄŞ¸¶)¸¦ Á¦°Å
+//ë°°ì—´ì˜ ë§ˆì§€ë§‰ì˜ ,(ì½¤ë§ˆ)ë¥¼ ì œê±°
 $string = substr($string, 0, strlen($string)-1);
 $string .= ");";
 $string .= "return anni;";
@@ -50,7 +50,7 @@ $string .= "} </script>";
 
 echo $string;
 
-$last_day = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);	//¿ù¿¡´ëÇÑ ÀÏµé
+$last_day = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);	//ì›”ì—ëŒ€í•œ ì¼ë“¤
 if (($_GET['Y']%4 == 0 && $_GET['Y']%100) || $_GET['Y']%400 == 0) $last_day[1] = 29;
 
 $string = "<script type = 'text/javascript'>";
@@ -58,13 +58,13 @@ $string .= "function sch_num_col() {";
 
 $string .= "var sch_num = new Array(";
 
-//´Ş·Â¿¡ Ãâ·ÂµÇ¾î ÀÖ´Â ´ŞÀÇ ÀÏÁ¤ °¹¼öµéÀ» ¸ğµÎ ÀúÀå
+//ë‹¬ë ¥ì— ì¶œë ¥ë˜ì–´ ìˆëŠ” ë‹¬ì˜ ì¼ì • ê°¯ìˆ˜ë“¤ì„ ëª¨ë‘ ì €ì¥
 for ($i = 1; $i <= $last_day[$_GET['M']-1]; $i++) {
 	$query = "select * from schedule where id = '".$_SESSION['userid']."' and sch_date = '".$_GET['Y']."-".$_GET['M']."-".$i."'";
 	$result = mysql_query($query);
 	$count = 0;
 
-//ÀÏÁ¤ °¹¼ö¸¦ ÇÏ³ªÇÏ³ª È®ÀÎ
+//ì¼ì • ê°¯ìˆ˜ë¥¼ í•˜ë‚˜í•˜ë‚˜ í™•ì¸
 	while ($list = mysql_fetch_row($result)) $count++;
 
 	$string .= "$count,";
@@ -82,7 +82,7 @@ echo $string;
 		<img src = "img/logo.png" width = "100px" height = "50px">
 	</div> </td>
 	<td align : right> <div style = "text-align : right; margin-right : 20px;">
-		<img src = "img/home.png" width = "50px" height = "50px" onclick="location.href='http://localhost/main.php'">
+		<img src = "img/home.png" width = "50px" height = "50px" onclick = "window.location.replace('main.php');">
 		<img src = "img/friend_menu.png" width = "50px" height = "50px" onclick = "window.location.replace('friend_main.php')">
 		<img src = "img/sch_menu.png" width = "50px" height = "50px" onclick = "window.location.reload();" >
 		<img src = "img/Logout(default).png" width = "50px" height = "50px" onclick = "window.location.replace('logout.php')" onmouseover = "this.src = 'img/Logout(over).png';" onmouseout = "this.src = 'img/Logout(default).png';">
@@ -95,26 +95,27 @@ echo $string;
 <div id = "View" align = "left" style = "background-color : #ffffff; position : relative; width : 300px; border : 3px solid #5ac7db; padding-left : 20px; padding-right : 20px; word-wrap : break-word;">
 
 <?php
-//Àü´ŞµÇ¾îÀÖ´Â value °ªÀÌ ÀÖÀ¸¸é ½ÇÇà
+//ì „ë‹¬ë˜ì–´ìˆëŠ” value ê°’ì´ ìˆìœ¼ë©´ ì‹¤í–‰
 if ($_GET['value']) display_list($_GET['value']);
 
-//ÀÏÁ¤ ³»¿ë È®ÀÎÇÏ´Â ÇÔ¼ö
+//ì¼ì • ë‚´ìš© í™•ì¸í•˜ëŠ” í•¨ìˆ˜
 function display_list($date_now) {
-//ÇØ´çÇÏ´Â ³¯°ú id(¹Ì±¸Çö)¸¦ È®ÀÎÇÏ¿© ÀÏÁ¤ Ãâ·Â
-	$query = "select * from schedule where id = '".$_SESSION['userid']."' and sch_date = '$date_now' order by sch_start_time";	//¾ÆÀÌµğ Ãß°¡µÇ¸é where µÚ¿¡ Ãß°¡ÇÒ °Í
+//í•´ë‹¹í•˜ëŠ” ë‚ ê³¼ id(ë¯¸êµ¬í˜„)ë¥¼ í™•ì¸í•˜ì—¬ ì¼ì • ì¶œë ¥
+	$query = "select * from schedule where id = '".$_SESSION['userid']."' and sch_date = '$date_now' order by sch_start_time";	//ì•„ì´ë”” ì¶”ê°€ë˜ë©´ where ë’¤ì— ì¶”ê°€í•  ê²ƒ
 	$result = mysql_query($query);
 	$i = 0;
 
-	$div_string = "<h3 style = 'text-align : center; font-family : serif;'> <b>- ".$_GET['value']." -</b> </h3>";
-//ÀÏÁ¤ Ãâ·Â
+	$div_string = "<h3 style = 'text-align : center; font-family : serif;'> <b>< ".$_GET['value']." ></b> </h3>";
+//ì¼ì • ì¶œë ¥
 	while ($arr_list = mysql_fetch_assoc($result)) {
 		if (!$i) $div_string .= "<table class = 'sch' style = 'width : 300px;'>";
-		$div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']." / ";
+		if ($arr_list['friend_range']) $div_string .= "<tr> <td onclick = 'window.location.replace(\"check_sch.php?index=".$arr_list['sch_index']."\");' style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']." / ";
+		else $div_string .= "<tr> <td style = 'max-width : 270px; word-wrap : break-word;'> <font class = 'small'>".$arr_list['sch_start_time']." ~ ".$arr_list['sch_finish_time']." / ";
 
 		switch($arr_list['friend_range']) {
-			case 0 : $div_string .= "³ª¸¸º¸±â"; break;
-			case 1 : $div_string .= "Ä£±¸¿¡°Ô¸¸"; break;
-			case 2 : $div_string .= "¸ğµÎ¿¡°Ô"; break;
+			case 0 : $div_string .= "ë‚˜ë§Œë³´ê¸°"; break;
+			case 1 : $div_string .= "ì¹œêµ¬ì—ê²Œë§Œ"; break;
+			case 2 : $div_string .= "ëª¨ë‘ì—ê²Œ"; break;
 			default : break;
 		}
 
@@ -127,12 +128,12 @@ function display_list($date_now) {
 
 	$div_string .= "</td> </tr> <tr style = 'height : 20px'> </tr>";
 
-//ÇØ´çÇÏ´Â ³¯ÀÇ ±â³äÀÏÀ» È®ÀÎ
+//í•´ë‹¹í•˜ëŠ” ë‚ ì˜ ê¸°ë…ì¼ì„ í™•ì¸
 	$spl_date = explode("-", $date_now);
 	$query = "select * from anniversary where (id = '".$_SESSION['userid']."' or id is null) and anni_mon = ".$spl_date[1]." and anni_day = ".$spl_date[2]." order by id";
 	$result = mysql_query($query);
 
-//±â³äÀÏÀÌ ÀÖ´Ù¸é Ãâ·Â
+//ê¸°ë…ì¼ì´ ìˆë‹¤ë©´ ì¶œë ¥
 	if (mysql_fetch_assoc($result)) {
 		$result = mysql_query($query);
 		$div_string .= "<tr> <td colspan = '3'> <div style = 'background-image : url(\"img/congration.png\"); height : 50px;'> </div> </td> </tr>";
@@ -154,7 +155,7 @@ function display_list($date_now) {
 	}
 
 	$div_string .= "<tr style = 'margin : 0 auto'> <td>";
-	$div_string .= "<img src = 'img/sch(default).png' onclick = 'add_sch();' onmouseover = 'this.src = \"img/sch(over).png\";' onmouseout = 'this.src = \"img/sch(default).png\";'> </td>";	//¼öÁ¤ ÆäÀÌÁö·Î ³Ñ¾î°¡´Â ¹öÆ°
+	$div_string .= "<img src = 'img/sch(default).png' onclick = 'add_sch();' onmouseover = 'this.src = \"img/sch(over).png\";' onmouseout = 'this.src = \"img/sch(default).png\";'> </td>";	//ìˆ˜ì • í˜ì´ì§€ë¡œ ë„˜ì–´ê°€ëŠ” ë²„íŠ¼
 	$div_string .= "<input type = 'hidden' name = 'value' value = '$date_now'>";
 	$div_string .= "<input type = 'hidden' name = 'Y' value = ".$_GET['Y'].">";
 	$div_string .= "<input type = 'hidden' name = 'M' value = ".$_GET['M'].">";
@@ -177,23 +178,23 @@ function display_list($date_now) {
 <input type = "hidden" name = "Y" value = "<?php echo $_GET['Y']; ?>">
 <input type = "hidden" name = "M" value = "<?php echo $_GET['M']; ?>">
 <table class = "normal" border = "1px">
-<tr> <td> <div style = "width : 50px; text-align : center"> ½ÃÀÛ ½Ã°£ </div> </td> <td style = "text-align : center;">
+<tr> <td> <div style = "width : 50px; text-align : center"> ì‹œì‘ ì‹œê°„ </div> </td> <td style = "text-align : center;">
 
 <?php
 
 $string = "<select class = 'normal' name = 's_hour' style = 'background : none;'>";
 for ($i = 0; $i < 24; $i++) {
 	$string .= "<option class = 'normal' value = '$i'>";
-	if ($i == 0) $string .= "AM 12 ½Ã </option>";
-	else if ($i/12 < 1) $string .= "AM $i ½Ã </option>";
-	else if ($i == 12) $string .= "PM $i ½Ã </option>";
-	else $string .= "PM ".($i%12)." ½Ã </option>";
+	if ($i == 0) $string .= "AM 12 ì‹œ </option>";
+	else if ($i/12 < 1) $string .= "AM $i ì‹œ </option>";
+	else if ($i == 12) $string .= "PM $i ì‹œ </option>";
+	else $string .= "PM ".($i%12)." ì‹œ </option>";
 }
 $string .= "</select>&nbsp&nbsp";
 
 $string .= "<select class = 'normal' name = 's_minute' style = 'background : none;'>";
 for ($i = 0; $i < 60; $i++)
-	$string .= "<option class = 'normal' value = '$i'> $i ºĞ </option>";
+	$string .= "<option class = 'normal' value = '$i'> $i ë¶„ </option>";
 $string .= "</select>";
 
 echo $string;
@@ -201,23 +202,23 @@ echo $string;
 ?>
 
 </td> </tr>
-<tr> <td> <div style = "width : 50px; text-align : center"> Á¾·á ½Ã°£ </div> </td> <td style = "text-align : center;">
+<tr> <td> <div style = "width : 50px; text-align : center"> ì¢…ë£Œ ì‹œê°„ </div> </td> <td style = "text-align : center;">
 
 <?php
 
 $string = "<select class = 'normal' name = 'f_hour' style = 'background : none;'>";
 for ($i = 0; $i < 24; $i++) {
 	$string .= "<option class = 'normal' value = '$i'>";
-	if ($i == 0) $string .= "AM 12 ½Ã </option>";
-	else if ($i/12 < 1) $string .= "AM $i ½Ã </option>";
-	else if ($i == 12) $string .= "PM $i ½Ã </option>";
-	else $string .= "PM ".($i%12)." ½Ã </option>";
+	if ($i == 0) $string .= "AM 12 ì‹œ </option>";
+	else if ($i/12 < 1) $string .= "AM $i ì‹œ </option>";
+	else if ($i == 12) $string .= "PM $i ì‹œ </option>";
+	else $string .= "PM ".($i%12)." ì‹œ </option>";
 }
 $string .= "</select>&nbsp&nbsp";
 
 $string .= "<select class = 'normal' name = 'f_minute' style = 'background : none;'>";
 for ($i = 0; $i < 60; $i++)
-	$string .= "<option class = 'normal' value = '$i'> $i ºĞ </option>";
+	$string .= "<option class = 'normal' value = '$i'> $i ë¶„ </option>";
 $string .= "</select>";
 
 echo $string;
@@ -226,14 +227,14 @@ echo $string;
 
 </td> </tr>
 
-<tr> <td> <div style = "width : 50px; text-align : center"> ÀÏÁ¤ ³»¿ë </div> </td> <td>
+<tr> <td> <div style = "width : 50px; text-align : center"> ì¼ì • ë‚´ìš© </div> </td> <td>
 <textarea name = "content" rows = "6" cols = "43" style = "background-color : transparent; border : none;"></textarea>
 
-</td> </tr> <tr class = 'normal'> <td> <div style = "width : 60px; text-align : center;"> °ø°³ ¹üÀ§ ¼³Á¤ </div> </td> <td style = "text-align : center;">
+</td> </tr> <tr class = 'normal'> <td> <div style = "width : 60px; text-align : center;"> ê³µê°œ ë²”ìœ„ ì„¤ì • </div> </td> <td style = "text-align : center;">
 <select name = "range" style = "background : none;">
-<option value = "0"> ³ª¸¸ º¸±â </option>
-<option value = "1"> Ä£±¸¿¡°Ô¸¸ </option>
-<option value = "2"> ¸ğµÎ¿¡°Ô </option> </td></tr> </table>
+<option value = "0"> ë‚˜ë§Œ ë³´ê¸° </option>
+<option value = "1"> ì¹œêµ¬ì—ê²Œë§Œ </option>
+<option value = "2"> ëª¨ë‘ì—ê²Œ </option> </td></tr> </table>
 
 <table style = "margin : 0 auto;"> <tr> <td>
 
@@ -247,9 +248,9 @@ echo $string;
 <div id = "Anni" style = "background-color : #ffffff; position : absolute; left : 400px; top : 300px; width : 400px; padding : 10px; border : thin solid black; word-wrap:break-word; visibility : hidden">
 <table class = "normal" border = "1px">
 <form method = "get" action = "add_anni.php">
-<tr> <td> <div style = "width : 60px; text-align : center;"> ³¯Â¥<br>ÀÔ·Â </div> </td> <td style = "text-align : center;">
+<tr> <td> <div style = "width : 60px; text-align : center;"> ë‚ ì§œ<br>ì…ë ¥ </div> </td> <td style = "text-align : center;">
 <?php
-//select¹® Ãâ·Â(³â/¿ù/ÀÏ)
+//selectë¬¸ ì¶œë ¥(ë…„/ì›”/ì¼)
 $string = "<select class = 'normal' name = 'year' style = 'background : none;'>";
 for ($i = $_GET['Y']-30; $i < $_GET['Y']+30; $i++)
 	$string .= "<option class = 'normal' value = '$i'> $i </option>";
@@ -272,7 +273,7 @@ echo $string;
 <input type = "hidden" name = "value" value = "<?php echo $_GET['value']; ?>">
 <input type = "hidden" name = "Y" value = "<?php echo $_GET['Y']; ?>">
 <input type = "hidden" name = "M" value = "<?php echo $_GET['M']; ?>">
-<div style = "width : 60px; text-align : center;"> ±â³äÀÏ ³»¿ë </div> </td> <td>
+<div style = "width : 60px; text-align : center;"> ê¸°ë…ì¼ ë‚´ìš© </div> </td> <td>
 <input type = "text" name = "content" size = "41" style = "background-color : transparent; border : none;">
 </td> </tr> </table>
 

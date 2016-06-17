@@ -1,8 +1,8 @@
-<?php require("connect_today.php"); session_start(); ?>
+ï»¿<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE>
 <html>
-<head> <title> Ä£±¸Ã¢ </title> </head>
+<head> <meta charset="utf-8"> <title> ì¹œêµ¬ì°½ </title> </head>
 <body class = "body">
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 
@@ -37,14 +37,14 @@
 
 <form method = "GET" action = "ask_id.php">
 
-<input type = "text" placeholder = "Ä£±¸ ½ÅÃ» ÇÒ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä." name = "friend" size = "40">
+<input type = "text" placeholder = "ì¹œêµ¬ ì‹ ì²­ í•  ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”." name = "friend" size = "40">
 
 </form>
 
 <table width = "350px" class = "normal">
 
 <?php
-//Ä£±¸ ½ÅÃ»
+//ì¹œêµ¬ ì‹ ì²­
 $query = "select * from friend where id = '".$_SESSION['userid']."' and accept = 'FALSE'";
 $result = mysql_query($query);
 

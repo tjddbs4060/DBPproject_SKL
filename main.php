@@ -1,9 +1,10 @@
-<?php require("connect_today.php"); session_start(); ?>
+﻿<?php require("connect_today.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>�⺻ȭ��</title>
+		<meta charset="utf-8">
+		<title>기본화면</title>
 		<link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 		<script type="text/javascript">
 			var db = (document.body) ? 1 : 0
@@ -78,7 +79,7 @@
 			<img src = "img/Logout(default).png" width = "50px" height = "50px" onclick = "window.location.replace('logout.php')" onmouseover = "this.src = 'img/Logout(over).png';" onmouseout = "this.src = 'img/Logout(default).png';">
 	</div> </td> </tr> </table>
 		<?php
-			$query = "select distinct s.sch_index, s.id, s.sch_date, s.content, s.sch_start_time, s.sch_finish_time from friend as f, schedule as s where (f.accept = 'TRUE' and f.id = '".$_SESSION['userid']."' and f.id_friend = s.id and s.friend_range > 0) or (f.accept = 'TRUE' and f.id_friend = '".$_SESSION['userid']."' and f.id = s.id and s.friend_range > 0) or s.id = '".$_SESSION['userid']."' order by s.sch_modify_time desc";
+			$query = "select distinct s.sch_index, s.id, s.sch_date, s.content, s.sch_start_time, s.sch_finish_time, s.friend_range from friend as f, schedule as s where (f.accept = 'TRUE' and f.id = '".$_SESSION['userid']."' and f.id_friend = s.id and s.friend_range > 0) or (f.accept = 'TRUE' and f.id_friend = '".$_SESSION['userid']."' and f.id = s.id and s.friend_range > 0) or s.id = '".$_SESSION['userid']."' order by s.sch_modify_time desc";
 			$result = mysql_query($query);
 			$num = 0;
 			while($row = mysql_fetch_assoc($result)){
@@ -100,33 +101,62 @@
 				$string .= "<table style='width:100%;''>";
 				$string .= "<tr>";
 				$string .= "<td style='width:200px; text-align:center;''>";
-				if($row['sch_start_time']==null || $row['sch_finish_time']==null)  $string .= "";
+				if($row['sch_start_time']=='00:00:00' && $row['sch_finish_time']=='00:00:00')  $string .= "";
 				else $string .= $row['sch_start_time'] . " ~ " . $row['sch_finish_time'];
 				$string .= "</td>";
 				$string .= "<td>". $row['content'] ."</td></tr></table></div><br/>";
-				$string .= "<table>";
-				$string .= "<tr><td style='width:370px'></td>";
-				$string .= "<td>";
-				if($_SESSION['userid'] != $row['id'])
-					$string .= "<img src = 'img/try(default).png' style='position:relative; bottom:-5px; margin-right:5px; float:right;'' onmouseover='this.src=\"img/try(over).png\" '; onmouseout='this.src=\"img/try(default).png\"';>";
-				$string .= "<img src = 'img/comment(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'commentView(".$row['sch_index'].");'; onmouseover='this.src=\"img/comment(over).png\" '; onmouseout='this.src=\"img/comment(default).png\"';>";
+				if($row['friend_range'] != 0) {		// 나만보기 범위의 글은 응원하기와 함께하는 사람 정보가 표시되지 않음
+					$string .= "<table>";
+					$string .= "<tr><td style='width:370px'>";
+	
+					$query_cheertable = "select * from support where sch_index = ".$row['sch_index']."";
+					$result_cheertable = mysql_query($query_cheertable);
+					$cheer_num = mysql_num_rows($result_cheertable);
+					if($cheer_num != 0) {
+						$string .= "<a href='cheer_people.php?index=".$row['sch_index']."'>응원수 : ";
+						$string .= $cheer_num;
+						$string .= "</a>";
+					}
+					
+					$query_trytable = "select * from entry where sch_index = ".$row['sch_index']."";
+					$result_trytable = mysql_query($query_trytable);
+					$try_num = mysql_num_rows($result_trytable);
+					if($try_num != 0) {
+						$string .= "<br/><a href='try_people.php?index=".$row['sch_index']."'>함께하는 사람 : ";
+						$string .= $try_num."명</a>";
+					}
+					$string .= "</td>";
 
-				$query_cheer = "select sp.sup_index from schedule as s, support as sp where sp.sch_index = ".$row['sch_index']." and sp.id ='".$_SESSION['userid']."'";
-				$result_cheer = mysql_query($query_cheer);
-				if(mysql_num_rows($result_cheer)==0){
-					$string .= "<img id='".$num."' src = 'img/cheer(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'location.href=\"http://localhost/cheerClick.php?index=".$row['sch_index']."\"';  onmouseover='this.src=\"img/cheer(over).png\" '; onmouseout='this.src=\"img/cheer(default).png\"';>";
-				}
-				else {
-					$string .= "<img id='".$num."' src = 'img/cheer(over).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = ' location.href=\"http://localhost/cheerClick.php?index=".$row['sch_index']."\"'; onmouseover='this.src=\"img/cheer(default).png\" '; onmouseout='this.src=\"img/cheer(over).png\"';>";
-				}
-				$string .= "</td></tr></table>";
 
-				$string .= "<hr/>";
-				$string .= "<table><tr><td>";
-				$string .= "<input type = 'text' placeholder = '����� �Է����ּ���.' name='comment' size = '65' style='position:relative'></td>";
-				$string .= "<input type='hidden' name = 'for_index' value='".$row['sch_index']."'>";
-				$string .= "</tr> </table>";
-				
+					$string .= "<td>";
+					if($_SESSION['userid'] != $row['id']){
+						$query_try = "select id from entry where sch_index = ".$row['sch_index']." and id ='".$_SESSION['userid']."'";
+						$result_try = mysql_query($query_try);
+						if(mysql_num_rows($result_try)==0){
+							$string .= "<img src = 'img/try(default).png' style='position:relative; bottom:-5px; margin-right:5px; float:right;'' onclick= 'location.href=\"tryQ.php?index=".$row['sch_index']."\"' onmouseover='this.src=\"img/try(over).png\" '; onmouseout='this.src=\"img/try(default).png\"';>";
+						}
+						else {
+							$string .= "<img src = 'img/try(over).png' style='position:relative; bottom:-5px; margin-right:5px; float:right;'' onclick= 'location.href=\"tryQ.php?index=".$row['sch_index']."\"' onmouseover='this.src=\"img/try(default).png\" '; onmouseout='this.src=\"img/try(over).png\"';>";
+						}
+					}
+					$string .= "<img src = 'img/comment(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'commentView(".$row['sch_index'].");'; onmouseover='this.src=\"img/comment(over).png\" '; onmouseout='this.src=\"img/comment(default).png\"';>";
+
+					$query_cheer = "select sp.sup_index from schedule as s, support as sp where sp.sch_index = ".$row['sch_index']." and sp.id ='".$_SESSION['userid']."'";
+					$result_cheer = mysql_query($query_cheer);
+					if(mysql_num_rows($result_cheer)==0){
+						$string .= "<img id='".$num."' src = 'img/cheer(default).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = 'location.href=\"cheerClick.php?index=".$row['sch_index']."\"';  onmouseover='this.src=\"img/cheer(over).png\" '; onmouseout='this.src=\"img/cheer(default).png\"';>";
+					}
+					else {
+						$string .= "<img id='".$num."' src = 'img/cheer(over).png' style='position:relative; bottom:-5px; margin-right:10px; float:right;' onclick = ' location.href=\"cheerClick.php?index=".$row['sch_index']."\"'; onmouseover='this.src=\"img/cheer(default).png\" '; onmouseout='this.src=\"img/cheer(over).png\"';>";
+					}
+					$string .= "</td></tr></table>";
+
+					$string .= "<hr/>";
+					$string .= "<table><tr><td>";
+					$string .= "<input type = 'text' placeholder = '댓글을 입력해주세요.' name='comment' size = '65' style='position:relative'></td>";
+					$string .= "<input type='hidden' name = 'for_index' value='".$row['sch_index']."'>";
+					$string .= "</tr> </table>";
+				}
 				$query_comment = "select com_index, id, com_date, content from comment where sch_index = ".$row['sch_index']." order by com_date desc";
 				$result_comment = mysql_query($query_comment);
 
@@ -152,8 +182,8 @@
 					$string .= "".$row2['content']."";
 					$string .= "</td>";
 					$string .= "<td>";
-					if($row2['id']==$_SESSION['userid'])  {// testuser1�� ���� ������ �ٲ����
-						$string .= "<img src= 'img/com_del(default).png' width = '20px' height= '20px' onclick = 'location.href=\"http://localhost/deleteComment.php?index=".$row2['com_index']."\"'; onmouseover='this.src=\"img/com_del(over).png\" '; onmouseout='this.src=\"img/com_del(default).png\"';>";
+					if($row2['id']==$_SESSION['userid'])  {// testuser1을 세션 값으로 바꿔야함
+						$string .= "<img src= 'img/com_del(default).png' width = '20px' height= '20px' onclick = 'location.href=\"deleteComment.php?index=".$row2['com_index']."\"'; onmouseover='this.src=\"img/com_del(over).png\" '; onmouseout='this.src=\"img/com_del(default).png\"';>";
 					}
 					$string .= "</td>";
 					$string .= "</tr>";

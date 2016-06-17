@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE>
 <html>
 <head>
+<meta charset="utf-8">
 <link rel = "stylesheet" type = "text/css" href = "Calendar.css"/>
 </head>
 <body style = "background-color : #f0f0f0;">
